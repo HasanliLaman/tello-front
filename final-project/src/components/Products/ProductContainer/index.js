@@ -1,11 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ProductInfo from "../ProductInfo";
 import StyleProductContainer from "./style";
 import Container from "../../UI/Container";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchProducts } from "../../../slices/productsSlice";
+import { getByCategory } from "../../../helpers/getByCategory";
 
 // TODO: Replace <a> with <Link>
 
 const ProductContainer = (props) => {
+  const data = useSelector((state) => state.products);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
+
+  console.log(
+    props.categories,
+    getByCategory(data.products.data, props.categories)
+  );
+
   return (
     <StyleProductContainer className={props.className}>
       <Container>
@@ -26,10 +41,14 @@ const ProductContainer = (props) => {
           </svg>
         </a>
         <div className="products">
-          <ProductInfo />
-          <ProductInfo />
-          <ProductInfo />
-          <ProductInfo />
+          {data.products.data &&
+            getByCategory(data.products.data, props.categories)
+              .reverse()
+              .filter((el, i) => {
+                if (i > 3) return false;
+                return true;
+              })
+              .map((el) => <ProductInfo info={el} key={el.id} />)}
         </div>
       </Container>
     </StyleProductContainer>

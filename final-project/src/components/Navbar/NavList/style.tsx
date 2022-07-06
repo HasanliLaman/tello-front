@@ -50,7 +50,7 @@ const StyleNavList = styled.ul`
 
     & > div {
       flex-direction: row;
-      gap: 5.6rem;
+      gap: 3rem;
     }
 
     a:hover {
@@ -59,6 +59,12 @@ const StyleNavList = styled.ul`
 
     li img {
       display: none;
+    }
+  }
+
+  @media (min-width: 992px) {
+    & > div {
+      gap: 5.6rem;
     }
   }
 `;

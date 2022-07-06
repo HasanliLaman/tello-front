@@ -13,6 +13,8 @@ const StyleProductInfo = styled.div`
 
   img {
     width: 101px;
+    height: 142px;
+    object-fit: cover;
     align-self: center;
   }
 
@@ -65,6 +67,7 @@ const StyleProductInfo = styled.div`
 
     img {
       width: 100%;
+      height: 210px;
       align-self: center;
     }
 

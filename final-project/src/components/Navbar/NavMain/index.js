@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Logo from "../../UI/Logo";
 import NavAccount from "../NavAccount";
 import NavHamburger from "../NavHamburger";

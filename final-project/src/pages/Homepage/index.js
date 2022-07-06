@@ -4,15 +4,12 @@ import FeatureContainer from "../../components/Features/FeatureContainer";
 import FooterMain from "../../components/Footer/FooterMain";
 import GoToProductsContainer from "../../components/GoToProducts/GoToProductsContainer";
 import HeroSlider from "../../components/Hero/HeroSlider";
-import NavMain from "../../components/Navbar/NavMain";
+import NavMain from "../../components/Navbar/NavMain/index";
 import PartnersContainer from "../../components/Partners/PartnersContainer";
 import ProductContainer from "../../components/Products/ProductContainer";
 import StyleHomepage from "./style";
-import commerce from "../../server/commerce";
 
 const Homepage = () => {
-  // commerce.products.list().then((product) => console.log(product));
-
   return (
     <StyleHomepage>
       <NavMain />
@@ -20,10 +17,14 @@ const Homepage = () => {
       <ProductContainer
         title="Ən çox satılan məhsullar"
         className="best-seller"
+        categories={["all-brands"]}
       />
-      <ProductContainer title="Yeni gələn məhsullar" />
+      <ProductContainer categories={["new"]} title="Yeni gələn məhsullar" />
       <Ads />
-      <ProductContainer title="Yeni gələn aksessuarlar" />
+      <ProductContainer
+        categories={["new", "accessoires"]}
+        title="Yeni gələn aksessuarlar"
+      />
       <GoToProductsContainer />
       <FeatureContainer />
       <PartnersContainer />
