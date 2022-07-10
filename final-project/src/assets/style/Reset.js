@@ -9,6 +9,10 @@ const Reset = css`
     box-sizing: border-box;
   }
 
+  button {
+    font-family: inherit;
+  }
+
   html,
   body,
   div,

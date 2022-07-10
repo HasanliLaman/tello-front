@@ -16,11 +16,6 @@ const ProductContainer = (props) => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  console.log(
-    props.categories,
-    getByCategory(data.products.data, props.categories)
-  );
-
   return (
     <StyleProductContainer className={props.className}>
       <Container>
