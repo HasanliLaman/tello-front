@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 import FilterType from "../FilterType";
 import StyleFilterConainer from "./style";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +8,9 @@ import { closeFilter } from "../../../slices/filterSlice";
 const FilterContainer = () => {
   const dispatch = useDispatch<AppDispatch>();
   const data = useSelector((state: RootState) => state.filter);
+  const brandArray = useMemo(() => data.brandList, [data.brandList]);
+  const categoryArray = useMemo(() => data.categoryList, [data.categoryList]);
+  const priceArray = useMemo(() => data.priceList, [data.priceList]);
 
   return (
     <StyleFilterConainer className={data.isOpenFilter ? "active" : ""}>
@@ -31,13 +34,29 @@ const FilterContainer = () => {
       </header>
       <div className="filter">
         <FilterType
+          id="brand"
           title="Brend"
+          filterArray={brandArray}
           list={["Apple", "Samsung", "Xiaomi", "Huawei"]}
         />
-        <FilterType title="Type" list={[]} />
-        <FilterType title="Category" list={[]} />
-        <FilterType title="Rəng" list={[]} />
-        <FilterType title="Qiymət" list={[]} />
+        <FilterType
+          id="category"
+          title="Category"
+          filterArray={categoryArray}
+          list={["PC", "Tablet", "Smartphone", "Smartwatch", "Headphones"]}
+        />
+        {/* <FilterType
+          id="color"
+          title="Rəng"
+          filterArray={useMemo(() => [], [])}
+          list={["Black", "White", "Pink", "Purple", "Blue"]}
+        /> */}
+        <FilterType
+          id="price"
+          title="Qiymət"
+          filterArray={priceArray}
+          list={["0-500", "500-1000", "1000-1500", "1500-2000", "2000-5000"]}
+        />
       </div>
     </StyleFilterConainer>
   );

@@ -7,7 +7,13 @@ import Container from "../../UI/Container";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState, AppDispatch } from "../../../store";
 import { fetchCategories } from "../../../slices/categoriesSlice";
+import {
+  changeBrandList,
+  clearBrands,
+  clearCategories,
+} from "../../../slices/filterSlice";
 import TypeCategories from "../../../models/categories";
+import { NavLink } from "react-router-dom";
 
 type Props = {
   navOpen: boolean;
@@ -40,7 +46,16 @@ const NavList: React.FC<Props> = ({ navOpen }) => {
             data.categories.data &&
             data.categories.data.map((el) => (
               <li key={el.id} onMouseEnter={() => openSubCategory(el)}>
-                <a href="#">{el.name}</a>
+                <NavLink
+                  onClick={() => {
+                    dispatch(clearBrands());
+                    dispatch(clearCategories());
+                    dispatch(changeBrandList(el.slug));
+                  }}
+                  to={`/products`}
+                >
+                  {el.name}
+                </NavLink>
                 {el.children[0] && <img src={dropdown} alt="dropdown" />}
               </li>
             ))}

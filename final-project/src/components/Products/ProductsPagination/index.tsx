@@ -2,17 +2,16 @@ import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import StyleProductsPagination from "./style";
 import AllProducts from "../AllProducts";
+import TypeProducts from "../../../models/products";
 
-// Example items, to simulate fetching from another resources.
-const items = [
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-  11, 12, 13, 14,
-];
+const ProductsPagination: React.FC<{
+  itemsPerPage: number;
+  items: TypeProducts.Datum[];
+}> = ({ itemsPerPage, items }) => {
+  const [currentItems, setCurrentItems] = useState<TypeProducts.Datum[] | null>(
+    null
+  );
 
-const ProductsPagination: React.FC<{ itemsPerPage: number }> = ({
-  itemsPerPage,
-}) => {
-  const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
 
@@ -20,7 +19,7 @@ const ProductsPagination: React.FC<{ itemsPerPage: number }> = ({
     const endOffset = itemOffset + itemsPerPage;
     setCurrentItems(items.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(items.length / itemsPerPage));
-  }, [itemOffset, itemsPerPage]);
+  }, [itemOffset, items, itemsPerPage]);
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % items.length;

@@ -1,22 +1,15 @@
 import React from "react";
 import ProductInfo from "../ProductInfo";
 import StyleAllProducts from "./style";
-import temp from "../../../assets/images/temp.png";
+import TypeProducts from "../../../models/products";
 
-const AllProducts: React.FC<{ currentItems: any }> = ({ currentItems }) => {
+const AllProducts: React.FC<{ currentItems: TypeProducts.Datum[] | null }> = ({
+  currentItems,
+}) => {
   return (
     <StyleAllProducts>
       {currentItems &&
-        currentItems.map((el: any) => (
-          <ProductInfo
-            info={{
-              id: 1,
-              image: { url: temp },
-              name: "laman",
-              price: { formatted: 3782 },
-            }}
-          />
-        ))}
+        currentItems.map((el: any) => <ProductInfo key={el.id} info={el} />)}
     </StyleAllProducts>
   );
 };

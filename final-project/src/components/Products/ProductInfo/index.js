@@ -1,9 +1,16 @@
 import React from "react";
 import StyleProductInfo from "./style";
+import { useNavigate } from "react-router-dom";
 
 const ProductInfo = ({ info }) => {
+  const navigate = useNavigate();
+
+  const goToProduct = function () {
+    navigate(`/${info.id}`);
+  };
+
   return (
-    <StyleProductInfo id={info.id} discount={false}>
+    <StyleProductInfo onClick={goToProduct} id={info.id} discount={false}>
       <img src={info.image.url} alt="Product" />
       <h3>{info.name}</h3>
       <div>

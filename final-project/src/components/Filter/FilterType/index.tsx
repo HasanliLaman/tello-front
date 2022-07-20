@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import FilterOption from "../FilterOption";
 import StyleFilterType from "./style";
 
-const FilterType: React.FC<{ title: string; list: string[] }> = ({
-  title,
-  list,
-}) => {
+interface Props {
+  title: string;
+  id: string;
+  list: string[];
+  filterArray: string[];
+}
+
+const FilterType: React.FC<Props> = ({ title, list, id, filterArray }) => {
   const [open, setOpen] = useState<boolean>(false);
 
   return (
@@ -20,7 +24,12 @@ const FilterType: React.FC<{ title: string; list: string[] }> = ({
       {open && (
         <ul>
           {list.map((el) => (
-            <FilterOption name={el} key={el} />
+            <FilterOption
+              id={id}
+              filterArray={filterArray}
+              name={el}
+              key={el}
+            />
           ))}
         </ul>
       )}

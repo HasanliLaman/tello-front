@@ -15,6 +15,10 @@ const StyleNavList = styled.ul`
   height: calc(100vh - 131px);
   z-index: 5;
 
+  .link-active {
+    color: var(--color-green);
+  }
+
   & > div {
     display: flex;
     flex-direction: column;

@@ -10,6 +10,7 @@ const Variables = css`
     --color-discount: #828282;
     --color-red: #db2c66;
     --color-gray: #f5f5f7;
+    --color-dark-gray: #4f4f4f;
 
     --border-radius: 8px;
 

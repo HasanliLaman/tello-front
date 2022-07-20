@@ -1,11 +1,21 @@
 import React from "react";
 import StyleNavSubList from "./style";
 import Container from "../../UI/Container";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {
+  clearBrands,
+  clearCategories,
+  changeBrandList,
+  changeCategoryList,
+} from "../../../slices/filterSlice";
 
 const NavSubList = (props) => {
+  const dispatch = useDispatch();
   const closeSubcategory = function () {
     props.setOpen(false);
   };
+
   return (
     <>
       <StyleNavSubList
@@ -26,8 +36,16 @@ const NavSubList = (props) => {
           </p>
           {props.items.list.length &&
             props.items.list.map((el) => (
-              <li key={el.id}>
-                <a href="#">{el.name}</a>
+              <li
+                key={el.id}
+                onClick={() => {
+                  dispatch(clearBrands());
+                  dispatch(clearCategories());
+                  dispatch(changeBrandList(props.items.name.toLowerCase()));
+                  dispatch(changeCategoryList(el.name.toLowerCase()));
+                }}
+              >
+                <Link to={`/products`}>{el.name}</Link>
               </li>
             ))}
         </Container>

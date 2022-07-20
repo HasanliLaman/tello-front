@@ -2,14 +2,15 @@ import React from "react";
 import StylePagePath from "./style";
 import arrow from "../../assets/images/icon-chevron-right-path.svg";
 import Container from "../UI/Container";
+import { Link } from "react-router-dom";
 
 const PagePath: React.FC<{ path: string }> = ({ path }) => {
   return (
     <StylePagePath>
       <Container>
-        <a href="#">Ana səhifə</a>
+        <Link to="/">Ana səhifə</Link>
         <img src={arrow} alt="arrow" />
-        <a href="#">{path}</a>
+        <p>{path}</p>
       </Container>
     </StylePagePath>
   );

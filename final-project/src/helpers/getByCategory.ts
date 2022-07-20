@@ -1,12 +1,12 @@
 import TypeProducts from "../models/products";
 
-export const getByCategory = function (
+export const getByCategory = (
   data: TypeProducts.Datum[],
   categories: string[]
-) {
-  const filteredData = data.filter((el) => {
-    const allCat = el.categories.map((cat) => cat.slug).join();
-    return allCat.includes(categories.join());
-  });
-  return filteredData;
-};
+) =>
+  data.filter((el) =>
+    el.categories
+      .map((cat) => cat.slug)
+      .join()
+      .includes(categories.join())
+  );

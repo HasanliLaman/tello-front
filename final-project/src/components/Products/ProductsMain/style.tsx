@@ -4,6 +4,7 @@ const StyleProductsMain = styled.main`
   .details {
     padding: 3.2rem 0 8.8rem;
     display: grid;
+    align-items: start;
     row-gap: 2.4rem;
 
     & > div:first-of-type {
