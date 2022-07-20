@@ -10,9 +10,16 @@ const GoToProductsContainer = () => {
   return (
     <StyleGoToProductsContainer>
       <Container>
-        <GoToProduct grid={true} title="Telefon" img={phone} padding={false} />
+        <GoToProduct
+          grid={true}
+          id="smartphone"
+          title="Telefon"
+          img={phone}
+          padding={false}
+        />
         <GoToProduct
           grid={false}
+          id="smartwatch"
           title="Smart Saat"
           img={watch}
           padding={true}
@@ -20,6 +27,7 @@ const GoToProductsContainer = () => {
         <GoToProduct
           grid={false}
           title="Aksesuar"
+          id="accessoires"
           img={accessoire}
           padding={true}
         />

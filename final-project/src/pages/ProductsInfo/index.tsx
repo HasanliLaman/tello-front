@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import ChangeToComments from "../../components/Comments/ChangeToComments";
 import PagePath from "../../components/PagePath";
 import MainContainer from "../../components/ProductDetails/ProductInfo/MainContainer";
@@ -9,13 +9,14 @@ import { fetchProduct } from "../../slices/productSlice";
 
 const ProductsInfo = () => {
   const { productId } = useParams();
-
+  const location = useLocation();
   const dispatch = useDispatch<AppDispatch>();
   const data = useSelector((state: RootState) => state.product);
 
   useEffect(() => {
     dispatch(fetchProduct(productId));
-  }, [dispatch, productId]);
+    window.scrollTo(0, 0);
+  }, [dispatch, productId, location]);
 
   return (
     <div>

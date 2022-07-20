@@ -18,11 +18,12 @@ const StyleFooterCredits = styled.div`
     margin-bottom: 2.4rem;
   }
 
-  a {
+  span {
     transition: 0.3s;
+    cursor: pointer;
   }
 
-  a:hover {
+  span:hover {
     color: var(--color-green);
   }
 

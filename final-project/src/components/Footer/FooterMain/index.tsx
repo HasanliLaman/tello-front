@@ -13,24 +13,26 @@ const FooterMain = () => {
           <FooterIcons />
           <FooterLinks
             links={true}
+            base="products"
             items={[
-              { name: "Yeni" },
-              { name: "Endirimlər" },
-              { name: "Aksessuarlar" },
-              { name: "Bütün brendlər" },
+              { name: "Yeni", slug: "new" },
+              { name: "Endirimlər", slug: "discount" },
+              { name: "Aksessuarlar", slug: "accessoires" },
+              { name: "Bütün brendlər", slug: "all-brands" },
             ]}
             header="Menu"
           />
           <FooterLinks
             links={true}
+            base=""
             items={[
-              { name: "Tez-tez soruşulan suallar" },
-              { name: "Çatdırılma xidməti" },
-              { name: "Geri qaytarılma şərtləri" },
+              { name: "Tez-tez soruşulan suallar", slug: "" },
+              { name: "Çatdırılma xidməti", slug: "" },
+              { name: "Geri qaytarılma şərtləri", slug: "" },
             ]}
             header="Kömək"
           />
-          <FooterLinks header="Əlaqə" />
+          <FooterLinks base="" links={false} items={[]} header="Əlaqə" />
         </div>
         <FooterCredits />
       </Container>

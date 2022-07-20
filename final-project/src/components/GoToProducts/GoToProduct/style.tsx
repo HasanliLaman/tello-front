@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyleGoToProduct = styled.div`
+const StyleGoToProduct = styled.div<{ grid: boolean; padding: boolean }>`
   border-radius: 8px;
   font-weight: 300;
   font-size: 0.89rem;
@@ -39,6 +39,7 @@ const StyleGoToProduct = styled.div`
 
   a {
     color: #3366ff;
+    margin-top: 0.9rem;
     display: flex;
     align-items: center;
     gap: 0.4rem;
@@ -62,6 +63,7 @@ const StyleGoToProduct = styled.div`
 
     a {
       gap: 1rem;
+      margin-top: 1.6rem;
     }
 
     p {

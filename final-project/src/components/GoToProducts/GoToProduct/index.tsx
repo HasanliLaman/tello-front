@@ -1,16 +1,40 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import StyleGoToProduct from "./style";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../store";
+import {
+  clearBrands,
+  clearCategories,
+  changeBrandList,
+  changeCategoryList,
+} from "../../../slices/filterSlice";
 
-// TODO: replace <a> with <Link>
+const GoToProduct: React.FC<{
+  grid: boolean;
+  title: string;
+  padding: boolean;
+  id: string;
+  img: string;
+}> = (props) => {
+  const dispatch = useDispatch<AppDispatch>();
+  const goToProducts = function () {
+    dispatch(clearBrands());
+    dispatch(clearCategories());
+    if (props.id === "accessoires") {
+      dispatch(changeBrandList(props.id));
+    } else {
+      dispatch(changeCategoryList(props.id));
+    }
+  };
 
-const GoToProduct = (props) => {
   return (
     <StyleGoToProduct grid={props.grid} padding={props.padding}>
       <div>
         <h2>{props.title}</h2>
-        <p>Məhsul sayı: 322</p>
-        <a href="#">
-          Məhsullara keçid{" "}
+        {/* <p>Məhsul sayı: 322</p> */}
+        <Link onClick={goToProducts} to="/products">
+          Məhsullara keçid
           <svg
             width="7"
             height="14"
@@ -25,7 +49,7 @@ const GoToProduct = (props) => {
               fill="#3366FF"
             />
           </svg>
-        </a>
+        </Link>
       </div>
       <img src={props.img} alt="products" />
     </StyleGoToProduct>

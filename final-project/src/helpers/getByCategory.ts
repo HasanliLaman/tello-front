@@ -3,10 +3,14 @@ import TypeProducts from "../models/products";
 export const getByCategory = (
   data: TypeProducts.Datum[],
   categories: string[]
-) =>
-  data.filter((el) =>
-    el.categories
-      .map((cat) => cat.slug)
-      .join()
-      .includes(categories.join())
-  );
+) => {
+  let filtered: TypeProducts.Datum[] = data;
+  categories.forEach((el) => {
+    filtered = [
+      ...filtered.filter((element) =>
+        element.categories.find((cat) => cat.slug === el)
+      ),
+    ];
+  });
+  return filtered;
+};

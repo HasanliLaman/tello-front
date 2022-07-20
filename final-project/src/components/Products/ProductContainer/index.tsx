@@ -1,26 +1,33 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ProductInfo from "../ProductInfo";
 import StyleProductContainer from "./style";
 import Container from "../../UI/Container";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchProducts } from "../../../slices/productsSlice";
+import { RootState, AppDispatch } from "../../../store";
 import { getByCategory } from "../../../helpers/getByCategory";
+import { changeBrandList, clearBrands } from "../../../slices/filterSlice";
+import { Link } from "react-router-dom";
 
-// TODO: Replace <a> with <Link>
+const ProductContainer: React.FC<{
+  className: string;
+  title: string;
+  categories: string[];
+}> = (props) => {
+  const data = useSelector((state: RootState) => state.products);
 
-const ProductContainer = (props) => {
-  const data = useSelector((state) => state.products);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
+  const dispatch = useDispatch<AppDispatch>();
+  const navigateToProducts = function () {
+    dispatch(clearBrands);
+    for (const el of props.categories) {
+      dispatch(changeBrandList(el));
+    }
+  };
 
   return (
     <StyleProductContainer className={props.className}>
       <Container>
         <h2>{props.title}</h2>
-        <a href="#">
+        <Link onClick={navigateToProducts} to="/products">
           Hamısına bax
           <svg
             width="7"
@@ -34,7 +41,7 @@ const ProductContainer = (props) => {
               fill="#333333"
             />
           </svg>
-        </a>
+        </Link>
         <div className="products">
           {data.products.data &&
             getByCategory(data.products.data, props.categories)
