@@ -3,7 +3,6 @@ import HeroSlide from "../HeroSlide";
 import StyleHeroSlider from "./style";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
-import Container from "../../UI/Container";
 import "swiper/css";
 import "swiper/css/pagination";
 

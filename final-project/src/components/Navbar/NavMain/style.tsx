@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyleNavMain = styled.section`
+const StyleNavMain = styled.section<{ open: boolean }>`
   padding: 0.8rem 0 1.6rem;
   position: relative;
   background: var(--color-white);

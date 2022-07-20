@@ -1,7 +1,7 @@
 import React from "react";
 import StyleFeatureItem from "./style";
 
-const FeatureItem = ({ img, title }) => {
+const FeatureItem:React.FC<{img:string;title:string}> = ({ img, title }) => {
   return (
     <StyleFeatureItem>
       <img src={img} alt="icon" />

@@ -2,7 +2,7 @@ import React from "react";
 import StyleNavSearch from "./style";
 import SearchContent from "../SearchContent";
 
-const NavSearch = (props) => {
+const NavSearch: React.FC<{ className: string }> = (props) => {
   return (
     <StyleNavSearch className={props.className}>
       <svg

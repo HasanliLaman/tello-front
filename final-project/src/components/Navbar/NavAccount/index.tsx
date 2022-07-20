@@ -1,10 +1,11 @@
 import React from "react";
 import StyleNavAccount from "./style";
 import { useSelector } from "react-redux";
+import { RootState } from "../../../store";
 import { Link } from "react-router-dom";
 
 const NavAccount = () => {
-  const data = useSelector((state) => state.cart);
+  const data = useSelector((state: RootState) => state.cart);
 
   return (
     <StyleNavAccount>

@@ -20,7 +20,7 @@ const StyleOverlay = styled.div`
 const Overlay = () => {
   return createPortal(
     <StyleOverlay></StyleOverlay>,
-    document.querySelector("#modal")
+    document.querySelector("#modal")!
   );
 };
 

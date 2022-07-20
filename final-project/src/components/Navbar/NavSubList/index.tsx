@@ -3,6 +3,8 @@ import StyleNavSubList from "./style";
 import Container from "../../UI/Container";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../store";
+import TypeCategories from "../../../models/categories";
 import {
   clearBrands,
   clearCategories,
@@ -10,8 +12,12 @@ import {
   changeCategoryList,
 } from "../../../slices/filterSlice";
 
-const NavSubList = (props) => {
-  const dispatch = useDispatch();
+const NavSubList: React.FC<{
+  open: boolean;
+  setOpen: (arg: boolean) => void;
+  items: { name: string; list: TypeCategories.Child[] };
+}> = (props) => {
+  const dispatch = useDispatch<AppDispatch>();
   const closeSubcategory = function () {
     props.setOpen(false);
   };
