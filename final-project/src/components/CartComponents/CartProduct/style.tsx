@@ -28,6 +28,8 @@ const StyleCartProduct = styled.div`
 
     & > img {
       width: 113px;
+      height: 163px;
+      object-fit: cover;
       justify-self: center;
       grid-column: 1/3;
     }
@@ -96,6 +98,7 @@ const StyleCartProduct = styled.div`
 
       & > img {
         width: 50px;
+        height: 72px;
         grid-row: 1/3;
         grid-column: 1/2;
       }

@@ -7,6 +7,7 @@ import { RootState, AppDispatch } from "../../../store";
 import { getByCategory } from "../../../helpers/getByCategory";
 import { changeBrandList, clearBrands } from "../../../slices/filterSlice";
 import { Link } from "react-router-dom";
+import Loading from "../../UI/Loading";
 
 const ProductContainer: React.FC<{
   className: string;
@@ -43,6 +44,7 @@ const ProductContainer: React.FC<{
           </svg>
         </Link>
         <div className="products">
+          {!data.products.data && <Loading padding={true} height={false} />}
           {data.products.data &&
             getByCategory(data.products.data, props.categories)
               .reverse()

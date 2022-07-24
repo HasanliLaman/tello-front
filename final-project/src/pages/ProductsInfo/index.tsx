@@ -6,6 +6,7 @@ import MainContainer from "../../components/ProductDetails/ProductInfo/MainConta
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState, AppDispatch } from "../../store";
 import { fetchProduct } from "../../slices/productSlice";
+import Loading from "../../components/UI/Loading";
 
 const ProductsInfo = () => {
   const { productId } = useParams();
@@ -20,6 +21,7 @@ const ProductsInfo = () => {
 
   return (
     <div>
+      {!data.product.id && <Loading padding={false} height={true} />}
       {data.product.id && (
         <>
           <PagePath path={data.product.name} />

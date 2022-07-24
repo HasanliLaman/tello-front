@@ -8,11 +8,13 @@ import ProductsPagination from "../ProductsPagination";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import TypeProducts from "../../../models/products";
+import Loading from "../../UI/Loading";
 
 const ProductsMain = () => {
   const [data, setData] = useState<TypeProducts.Datum[]>([]);
   const filterData = useSelector((state: RootState) => state.filter);
   const products = useSelector((state: RootState) => state.products);
+  const data2 = useMemo(() => data, [data]);
 
   useEffect(() => {
     if (products.products.data) {
@@ -70,10 +72,10 @@ const ProductsMain = () => {
         <div className="details">
           <p>{data.length} məhsul tapıldı</p>
           <ListOrder />
-          <ProductsPagination
-            items={useMemo(() => data, [data])}
-            itemsPerPage={9}
-          />
+          {products.loading && <Loading padding={true} height={false} />}
+          {!products.loading && (
+            <ProductsPagination items={data2} itemsPerPage={9} />
+          )}
         </div>
       </Container>
     </StyleProductsMain>

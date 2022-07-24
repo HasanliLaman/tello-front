@@ -2,11 +2,11 @@ import React from "react";
 import StyleProductInfo from "./style";
 import { useNavigate } from "react-router-dom";
 
-const ProductInfo = ({ info }) => {
+const ProductInfo: React.FC<{ info: any }> = ({ info }) => {
   const navigate = useNavigate();
 
   const goToProduct = function () {
-    navigate(`/${info.id}`);
+    navigate(`/products/${info.id}`);
   };
 
   return (

@@ -6,6 +6,7 @@ import NavSearch from "../NavSearch";
 import Container from "../../UI/Container";
 import StyleNavMain from "./style";
 import NavList from "../NavList";
+import { Link } from "react-router-dom";
 
 const NavMain = () => {
   const [navOpen, setNavOpen] = useState(false);
@@ -14,7 +15,9 @@ const NavMain = () => {
     <StyleNavMain open={navOpen}>
       <Container>
         <NavHamburger navOpen={navOpen} setNavOpen={setNavOpen} />
-        <Logo />
+        <Link to={"/"}>
+          <Logo />
+        </Link>
         <NavSearch className="search" />
         <NavAccount />
         <NavList navOpen={navOpen} />

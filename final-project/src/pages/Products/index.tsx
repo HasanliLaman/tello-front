@@ -9,12 +9,12 @@ import { useLocation } from "react-router-dom";
 
 const Products = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const location = useLocation()
+  const location = useLocation();
 
   useEffect(() => {
     dispatch(fetchProducts());
     window.scrollTo(0, 0);
-  }, [dispatch,location]);
+  }, [dispatch, location]);
 
   return (
     <StyleProducts>

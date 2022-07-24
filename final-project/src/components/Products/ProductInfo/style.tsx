@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyleProductInfo = styled.div`
+const StyleProductInfo = styled.div<{ discount: boolean }>`
   font-size: 1.4rem;
   line-height: 2rem;
   box-shadow: 0px 4px 8px rgba(164, 164, 164, 0.16);

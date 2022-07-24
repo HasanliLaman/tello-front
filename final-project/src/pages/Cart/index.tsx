@@ -18,7 +18,7 @@ const Cart = () => {
   return (
     <StyleCart>
       <Container>
-        <h2>{`Səbət (${data.products.length} məhsul)`}</h2>
+        <h2>{`Səbət (${data.totalQuantity} məhsul)`}</h2>
         {!data.totalQuantity && <CartEmpty />}
         {data.totalQuantity && <CartProductContainer />}
       </Container>
