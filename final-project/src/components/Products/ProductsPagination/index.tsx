@@ -23,7 +23,7 @@ const ProductsPagination: React.FC<{ itemsPerPage: number }> = ({
     setPageCount(Math.ceil(displayedProducts.length / itemsPerPage));
   }, [itemOffset, displayedProducts, itemsPerPage]);
 
-  const handlePageClick = (event) => {
+  const handlePageClick = (event: { selected: number }) => {
     const newOffset =
       (event.selected * itemsPerPage) % displayedProducts.length;
     setItemOffset(newOffset);

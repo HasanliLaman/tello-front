@@ -1,3 +1,4 @@
+import React from "react";
 import GlobalStyle from "./assets/style/GlobalStyles";
 import NavMain from "./components/Navbar/NavMain";
 import FooterMain from "./components/Footer/FooterMain";

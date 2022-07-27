@@ -15,7 +15,7 @@ interface TypeInitial {
 }
 
 const initialState: TypeInitial = localStorage.getItem("cart")
-  ? JSON.parse(localStorage.getItem("cart"))
+  ? JSON.parse(localStorage.getItem("cart")!)
   : {
       products: [],
       totalPrice: 0,

@@ -2,18 +2,20 @@ import React from "react";
 import StyleProductVariants from "./style";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store";
+import { RootObject } from "../../../../models/productInfo";
 
 const ProductVariants = () => {
   const data = useSelector((state: RootState) => state.product);
 
-  const getVariants = function (products: any) {
+  const getVariants = function (products: RootObject) {
+    console.log(products);
     if (products.variant_groups[0]) {
-      const vars = products.variant_groups.map((variant: any) => {
+      const vars = products.variant_groups.map((variant) => {
         if (variant.name === "Color") {
           return (
             <div className="color">
               <h2>Rəng:</h2>
-              {variant.options.map((el: any) => (
+              {variant.options.map((el) => (
                 <div
                   key={el.name}
                   style={{ background: `${el.name.toLowerCase()}` }}
@@ -25,7 +27,7 @@ const ProductVariants = () => {
           return (
             <div className="storage">
               <h2>Yaddaş:</h2>
-              {variant.options.map((el: any) => (
+              {variant.options.map((el) => (
                 <div key={el.name}>{el.name}</div>
               ))}
             </div>
@@ -34,7 +36,7 @@ const ProductVariants = () => {
           return (
             <div className="storage">
               <h2>{variant.name}:</h2>
-              {variant.options.map((el: any) => (
+              {variant.options.map((el) => (
                 <div key={el.name}>{el.name}</div>
               ))}
             </div>
@@ -48,7 +50,7 @@ const ProductVariants = () => {
     <>
       {getVariants(data.product)[0] && (
         <StyleProductVariants>
-          {getVariants(data.product).map((el: any, i: number) => (
+          {getVariants(data.product).map((el, i: number) => (
             <React.Fragment key={i}>{el}</React.Fragment>
           ))}
         </StyleProductVariants>

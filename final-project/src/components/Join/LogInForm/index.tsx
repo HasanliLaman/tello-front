@@ -5,22 +5,25 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { api } from "../../../server";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+
+interface InputTypes {
+  email: string;
+  password: string;
+}
 
 const LogInForm = () => {
-  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({
+  } = useForm<InputTypes>({
     resolver: yupResolver(logInSchema),
   });
 
-  const submitHandler = async function (data) {
+  const submitHandler = async function (data: { email: string }) {
     try {
-      const res = await api.post(
+      await api.post(
         `/customers/email-token`,
         {
           email: data.email,

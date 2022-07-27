@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import Ads from "../../components/Ads";
 import FeatureContainer from "../../components/Features/FeatureContainer";
 import GoToProductsContainer from "../../components/GoToProducts/GoToProductsContainer";
@@ -18,7 +18,7 @@ const Homepage = () => {
   useEffect(() => {
     dispatch(fetchProducts());
     window.scrollTo(0, 0);
-  }, [dispatch,location]);
+  }, [dispatch, location]);
 
   return (
     <StyleHomepage>

@@ -29,9 +29,9 @@ const NavList: React.FC<Props> = ({ navOpen }) => {
     dispatch(fetchCategories());
   }, [dispatch]);
 
-  const openSubCategory = function (el: any) {
+  const openSubCategory = function (el: TypeCategories.Datum) {
     setSubcategories({ list: el.children, name: el.name });
-    setOpen(true && el.children[0]);
+    setOpen(true && Boolean(el.children.length));
   };
 
   return (

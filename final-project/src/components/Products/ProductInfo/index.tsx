@@ -1,8 +1,9 @@
 import React from "react";
 import StyleProductInfo from "./style";
 import { useNavigate } from "react-router-dom";
+import { RootObject } from "../../../models/productInfo";
 
-const ProductInfo: React.FC<{ info: any }> = ({ info }) => {
+const ProductInfo: React.FC<{ info: RootObject }> = ({ info }) => {
   const navigate = useNavigate();
 
   const goToProduct = function () {

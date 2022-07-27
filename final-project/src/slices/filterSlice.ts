@@ -113,8 +113,8 @@ export const filterSlice = createSlice({
                 .map((element) => element.split("-"))
                 .find((element) => {
                   return (
-                    +element[0] < +el.price.formatted.replaceAll(",", "") &&
-                    +el.price.formatted.replaceAll(",", "") < +element[1]
+                    +element[0] < +el.price.formatted.replace(",", "") &&
+                    +el.price.formatted.replace(",", "") < +element[1]
                   );
                 })
             )

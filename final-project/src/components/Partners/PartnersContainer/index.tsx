@@ -17,7 +17,7 @@ import "swiper/css/pagination";
 const PartnersContainer = () => {
   return (
     <StylePartnersContainer>
-      <Container showArrows={false}>
+      <Container>
         <Swiper
           slidesPerView={1}
           spaceBetween={10}

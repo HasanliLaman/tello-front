@@ -7,6 +7,14 @@ import { api } from "../../../server";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
+interface InputTypes {
+  email: string;
+  password: string;
+  phone: string;
+  name: string;
+  terms: boolean;
+}
+
 const SignUpForm = () => {
   const navigate = useNavigate();
   const {
@@ -14,13 +22,17 @@ const SignUpForm = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({
+  } = useForm<InputTypes>({
     resolver: yupResolver(signUpSchema),
   });
 
-  const submitHandler = async function (data) {
+  const submitHandler = async function (data: {
+    email: string;
+    phone: string;
+    name: string;
+  }) {
     try {
-      const res = await api.post(
+      await api.post(
         `/customers`,
         {
           email: data.email,

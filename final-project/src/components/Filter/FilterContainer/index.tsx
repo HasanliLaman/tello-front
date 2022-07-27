@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useMemo } from "react";
 import FilterType from "../FilterType";
 import StyleFilterConainer from "./style";
 import { useDispatch, useSelector } from "react-redux";

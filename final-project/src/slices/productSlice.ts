@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { api } from "../server/index";
+import { RootObject } from "../models/productInfo";
 
 export const fetchProduct = createAsyncThunk(
   "product/fetchProduct",
@@ -22,7 +23,7 @@ export const fetchProduct = createAsyncThunk(
 interface ProductState {
   loading: boolean;
   error: null | string;
-  product: any;
+  product: RootObject;
 }
 
 const initialState = {
