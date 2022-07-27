@@ -88,7 +88,7 @@ export const filterSlice = createSlice({
       return (state = {
         ...state,
         displayedProducts: action.payload
-          .filter((el) => {
+          .filter((el: TypeProducts.Datum) => {
             if (
               !state.brandList[0] ||
               el.categories.find((cat) => state.brandList.includes(cat.slug))
@@ -96,7 +96,7 @@ export const filterSlice = createSlice({
               return true;
             return false;
           })
-          .filter((el) => {
+          .filter((el: TypeProducts.Datum) => {
             if (
               !state.categoryList[0] ||
               el.categories.find((cat) =>
@@ -106,7 +106,7 @@ export const filterSlice = createSlice({
               return true;
             return false;
           })
-          .filter((el) => {
+          .filter((el: TypeProducts.Datum) => {
             if (
               !state.priceList[0] ||
               state.priceList

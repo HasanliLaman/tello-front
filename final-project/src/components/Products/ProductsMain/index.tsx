@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect } from "react";
 import StyleProductsMain from "./style";
 import Container from "../../UI/Container";
 import FilterContainer from "../../Filter/FilterContainer";
@@ -13,10 +13,6 @@ import Loading from "../../UI/Loading";
 const ProductsMain = () => {
   const filterData = useSelector((state: RootState) => state.filter);
   const products = useSelector((state: RootState) => state.products);
-  const memoizedData = useMemo(
-    () => filterData.displayedProducts,
-    [filterData.displayedProducts]
-  );
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
@@ -40,9 +36,7 @@ const ProductsMain = () => {
           <p>{filterData.displayedProducts.length} məhsul tapıldı</p>
           <ListOrder />
           {products.loading && <Loading padding={true} height={false} />}
-          {!products.loading && (
-            <ProductsPagination items={memoizedData} itemsPerPage={9} />
-          )}
+          {!products.loading && <ProductsPagination itemsPerPage={9} />}
         </div>
       </Container>
     </StyleProductsMain>

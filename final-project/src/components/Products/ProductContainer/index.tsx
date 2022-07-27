@@ -5,7 +5,7 @@ import Container from "../../UI/Container";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../../../store";
 import { getByCategory } from "../../../helpers/getByCategory";
-import { changeBrandList, clearBrands } from "../../../slices/filterSlice";
+import { changeBrandList, clearFilter } from "../../../slices/filterSlice";
 import { Link } from "react-router-dom";
 import Loading from "../../UI/Loading";
 
@@ -18,7 +18,7 @@ const ProductContainer: React.FC<{
 
   const dispatch = useDispatch<AppDispatch>();
   const navigateToProducts = function () {
-    dispatch(clearBrands);
+    dispatch(clearFilter);
     for (const el of props.categories) {
       dispatch(changeBrandList(el));
     }

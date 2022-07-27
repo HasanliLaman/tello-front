@@ -3,11 +3,13 @@ import ReactPaginate from "react-paginate";
 import StyleProductsPagination from "./style";
 import AllProducts from "../AllProducts";
 import TypeProducts from "../../../models/products";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store";
 
-const ProductsPagination: React.FC<{
-  itemsPerPage: number;
-  items: TypeProducts.Datum[];
-}> = ({ itemsPerPage, items }) => {
+const ProductsPagination: React.FC<{ itemsPerPage: number }> = ({
+  itemsPerPage,
+}) => {
+  const { displayedProducts } = useSelector((state: RootState) => state.filter);
   const [currentItems, setCurrentItems] = useState<TypeProducts.Datum[] | null>(
     null
   );
@@ -17,12 +19,13 @@ const ProductsPagination: React.FC<{
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
-    setCurrentItems(items.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(items.length / itemsPerPage));
-  }, [itemOffset, items, itemsPerPage]);
+    setCurrentItems(displayedProducts.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(displayedProducts.length / itemsPerPage));
+  }, [itemOffset, displayedProducts, itemsPerPage]);
 
   const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % items.length;
+    const newOffset =
+      (event.selected * itemsPerPage) % displayedProducts.length;
     setItemOffset(newOffset);
   };
 
