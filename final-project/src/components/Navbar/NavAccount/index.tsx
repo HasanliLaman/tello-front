@@ -2,14 +2,22 @@ import React from "react";
 import StyleNavAccount from "./style";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const NavAccount = () => {
+  const navigate = useNavigate();
   const data = useSelector((state: RootState) => state.cart);
+  const auth = useSelector((state: RootState) => state.auth);
+
+  const navigateUser = function () {
+    if (auth.loggedIn) navigate("/dashboard");
+    else navigate("/join/signup");
+  };
 
   return (
     <StyleNavAccount>
       <svg
+        onClick={navigateUser}
         width="14"
         height="18"
         viewBox="0 0 14 18"

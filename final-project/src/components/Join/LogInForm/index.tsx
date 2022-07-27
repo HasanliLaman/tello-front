@@ -1,13 +1,60 @@
 import React from "react";
 import eye from "../../../assets/images/icon-eye.svg";
+import { logInSchema } from "../../../schemas";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { api } from "../../../server";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const LogInForm = () => {
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(logInSchema),
+  });
+
+  const submitHandler = async function (data) {
+    try {
+      const res = await api.post(
+        `/customers/email-token`,
+        {
+          email: data.email,
+          base_url: "http://localhost:3000/dashboard",
+        },
+        {
+          headers: {
+            "X-Authorization":
+              "sk_44386cb648d0b470fff3958c1db5c12168d99d319a75a",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      toast.success("Please check your email!");
+      reset({
+        email: "",
+        password: "",
+      });
+    } catch (err) {
+      toast.error("Something went wrong!");
+    }
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit(submitHandler)}>
       <div className="form-group">
         <label htmlFor="email">E-mail</label>
-        <input type="email" placeholder="nümunə@gmail.com" id="email" />
-        <p>Wrong email address</p>
+        <input
+          type="email"
+          placeholder="nümunə@gmail.com"
+          id="email"
+          {...register("email")}
+        />
+        {errors.email?.message && <p>{errors.email?.message}</p>}
       </div>
       <div className="form-group">
         <label htmlFor="password">Şifrə</label>
@@ -16,10 +63,11 @@ const LogInForm = () => {
             type="password"
             placeholder="Şifrənizi daxil edin"
             id="password"
+            {...register("password")}
           />
           <img src={eye} alt="password" />
         </div>
-        <p>Wrong email address</p>
+        {errors.password?.message && <p>{errors.password?.message}</p>}
       </div>
       <p>Şifrəni unutmusunuz?</p>
       <button>Daxil ol</button>

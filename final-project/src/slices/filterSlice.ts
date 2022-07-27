@@ -8,6 +8,7 @@ interface TypeInitial {
   brandList: string[];
   categoryList: string[];
   priceList: string[];
+  displayedProducts: TypeProducts.Datum[];
 }
 
 const initialState: TypeInitial = {
@@ -17,6 +18,7 @@ const initialState: TypeInitial = {
   brandList: [],
   categoryList: [],
   priceList: [],
+  displayedProducts: [],
 };
 
 export const filterSlice = createSlice({
@@ -78,29 +80,48 @@ export const filterSlice = createSlice({
       return { ...state, priceList: [...state.priceList, action.payload] };
     },
 
-    clearBrands(state) {
-      return { ...state, brandList: [] };
-    },
-
-    clearCategories(state) {
-      return { ...state, categoryList: [] };
+    clearFilter(state) {
+      return { ...state, brandList: [], categoryList: [], priceList: [] };
     },
 
     changeDisplayedProducts(state, action) {
-      if (state.brandList[0]) {
-        const filtered = action.payload.filter((el: TypeProducts.Datum) => {
-          if (el.categories.find((cat) => state.brandList.includes(cat.slug))) {
-            return true;
-          }
-          return false;
-        });
-        return (state = {
-          ...state,
-          // products: filtered,
-        });
-      } else {
-        // return (state = { ...state, products: action.payload });
-      }
+      return (state = {
+        ...state,
+        displayedProducts: action.payload
+          .filter((el) => {
+            if (
+              !state.brandList[0] ||
+              el.categories.find((cat) => state.brandList.includes(cat.slug))
+            )
+              return true;
+            return false;
+          })
+          .filter((el) => {
+            if (
+              !state.categoryList[0] ||
+              el.categories.find((cat) =>
+                state.categoryList.includes(cat.name.toLowerCase())
+              )
+            )
+              return true;
+            return false;
+          })
+          .filter((el) => {
+            if (
+              !state.priceList[0] ||
+              state.priceList
+                .map((element) => element.split("-"))
+                .find((element) => {
+                  return (
+                    +element[0] < +el.price.formatted.replaceAll(",", "") &&
+                    +el.price.formatted.replaceAll(",", "") < +element[1]
+                  );
+                })
+            )
+              return true;
+            return false;
+          }),
+      });
     },
   },
 });
@@ -113,8 +134,7 @@ export const {
   changeBrandList,
   changePriceList,
   changeCategoryList,
-  clearBrands,
-  clearCategories,
+  clearFilter,
   changeDisplayedProducts,
 } = filterSlice.actions;
 export default filterSlice.reducer;

@@ -9,6 +9,10 @@ import Cart from "./pages/Cart";
 import Join from "./pages/Join";
 import LogIn from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
+import Dashboard from "./pages/Dashboard";
+import Authentication from "./pages/Authentication";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (
@@ -21,6 +25,8 @@ const App = () => {
           <Route path="products/:productId" element={<ProductsInfo />} />
           <Route path="/products" element={<Products />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/dashboard/:token" element={<Authentication />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/join" element={<Join />}>
             <Route path="login" element={<LogIn />} />
             <Route path="signup" element={<SignUp />} />
@@ -28,6 +34,7 @@ const App = () => {
         </Routes>
         <FooterMain />
       </div>
+      <ToastContainer position="bottom-right" />
     </>
   );
 };

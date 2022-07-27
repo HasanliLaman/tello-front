@@ -4,8 +4,7 @@ import StyleGoToProduct from "./style";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../store";
 import {
-  clearBrands,
-  clearCategories,
+  clearFilter,
   changeBrandList,
   changeCategoryList,
 } from "../../../slices/filterSlice";
@@ -19,8 +18,7 @@ const GoToProduct: React.FC<{
 }> = (props) => {
   const dispatch = useDispatch<AppDispatch>();
   const goToProducts = function () {
-    dispatch(clearBrands());
-    dispatch(clearCategories());
+    dispatch(clearFilter());
     if (props.id === "accessoires") {
       dispatch(changeBrandList(props.id));
     } else {

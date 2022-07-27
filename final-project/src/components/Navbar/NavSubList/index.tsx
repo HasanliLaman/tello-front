@@ -6,8 +6,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../store";
 import TypeCategories from "../../../models/categories";
 import {
-  clearBrands,
-  clearCategories,
+  clearFilter,
   changeBrandList,
   changeCategoryList,
 } from "../../../slices/filterSlice";
@@ -45,8 +44,7 @@ const NavSubList: React.FC<{
               <li
                 key={el.id}
                 onClick={() => {
-                  dispatch(clearBrands());
-                  dispatch(clearCategories());
+                  dispatch(clearFilter());
                   dispatch(changeBrandList(props.items.name.toLowerCase()));
                   dispatch(changeCategoryList(el.name.toLowerCase()));
                 }}

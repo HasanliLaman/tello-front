@@ -102,6 +102,12 @@ const StyleJoin = styled.section`
       height: 22px;
     }
 
+    p {
+      color: var(--color-red);
+      font-size: 1.4rem;
+      line-height: 1.6rem;
+    }
+
     label {
       font-size: 1.2rem;
       line-height: 1.6rem;

@@ -5,63 +5,30 @@ import FilterContainer from "../../Filter/FilterContainer";
 import ChangeProducts from "../../ChangeProducts";
 import ListOrder from "../../Filter/ListOrder";
 import ProductsPagination from "../ProductsPagination";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../store";
-import TypeProducts from "../../../models/products";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "../../../store";
+import { changeDisplayedProducts } from "../../../slices/filterSlice";
 import Loading from "../../UI/Loading";
 
 const ProductsMain = () => {
-  const [data, setData] = useState<TypeProducts.Datum[]>([]);
   const filterData = useSelector((state: RootState) => state.filter);
   const products = useSelector((state: RootState) => state.products);
-  const data2 = useMemo(() => data, [data]);
+  const memoizedData = useMemo(
+    () => filterData.displayedProducts,
+    [filterData.displayedProducts]
+  );
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     if (products.products.data) {
-      setData(
-        products.products.data
-          .filter((el) => {
-            if (
-              !filterData.brandList[0] ||
-              el.categories.find((cat) =>
-                filterData.brandList.includes(cat.slug)
-              )
-            )
-              return true;
-            return false;
-          })
-          .filter((el) => {
-            if (
-              !filterData.categoryList[0] ||
-              el.categories.find((cat) =>
-                filterData.categoryList.includes(cat.name.toLowerCase())
-              )
-            )
-              return true;
-            return false;
-          })
-          .filter((el) => {
-            if (
-              !filterData.priceList[0] ||
-              filterData.priceList
-                .map((element) => element.split("-"))
-                .find((element) => {
-                  return (
-                    +element[0] < +el.price.formatted.replaceAll(",", "") &&
-                    +el.price.formatted.replaceAll(",", "") < +element[1]
-                  );
-                })
-            )
-              return true;
-            return false;
-          })
-      );
+      dispatch(changeDisplayedProducts(products.products.data));
     }
   }, [
     products,
     filterData.brandList,
     filterData.categoryList,
     filterData.priceList,
+    dispatch,
   ]);
 
   return (
@@ -70,11 +37,11 @@ const ProductsMain = () => {
       <Container>
         <FilterContainer />
         <div className="details">
-          <p>{data.length} məhsul tapıldı</p>
+          <p>{filterData.displayedProducts.length} məhsul tapıldı</p>
           <ListOrder />
           {products.loading && <Loading padding={true} height={false} />}
           {!products.loading && (
-            <ProductsPagination items={data2} itemsPerPage={9} />
+            <ProductsPagination items={memoizedData} itemsPerPage={9} />
           )}
         </div>
       </Container>

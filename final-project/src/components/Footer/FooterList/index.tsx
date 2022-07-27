@@ -2,7 +2,7 @@ import React from "react";
 import StyleFooterList from "./style";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../store";
-import { clearBrands, changeBrandList } from "../../../slices/filterSlice";
+import { clearFilter, changeBrandList } from "../../../slices/filterSlice";
 import { Link } from "react-router-dom";
 
 const FooterList: React.FC<{
@@ -11,7 +11,7 @@ const FooterList: React.FC<{
 }> = ({ list, base }) => {
   const dispatch = useDispatch<AppDispatch>();
   const goToCategory = function (name: string) {
-    dispatch(clearBrands());
+    dispatch(clearFilter());
     dispatch(changeBrandList(name));
   };
 

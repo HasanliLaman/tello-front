@@ -7,11 +7,7 @@ import Container from "../../UI/Container";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState, AppDispatch } from "../../../store";
 import { fetchCategories } from "../../../slices/categoriesSlice";
-import {
-  changeBrandList,
-  clearBrands,
-  clearCategories,
-} from "../../../slices/filterSlice";
+import { changeBrandList, clearFilter } from "../../../slices/filterSlice";
 import TypeCategories from "../../../models/categories";
 import { NavLink } from "react-router-dom";
 
@@ -48,8 +44,7 @@ const NavList: React.FC<Props> = ({ navOpen }) => {
               <li key={el.id} onMouseEnter={() => openSubCategory(el)}>
                 <NavLink
                   onClick={() => {
-                    dispatch(clearBrands());
-                    dispatch(clearCategories());
+                    dispatch(clearFilter());
                     dispatch(changeBrandList(el.slug));
                   }}
                   to={`/products`}

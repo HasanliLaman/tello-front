@@ -3,14 +3,15 @@ import StyleAddToBasket from "./style";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../../../../store";
 import { addToBasket, setLocalStorage } from "../../../../slices/cartSlice";
+import { toast } from "react-toastify";
 
 const AddToBasket = () => {
   const data = useSelector((state: RootState) => state.product);
-  const cart = useSelector((state: RootState) => state.cart);
   const [count, setCount] = useState<number>(1);
   const dispatch = useDispatch<AppDispatch>();
 
   const addProduct = () => {
+    toast.success("Product is added!");
     dispatch(
       addToBasket({
         name: data.product.name,
