@@ -41,7 +41,7 @@ const FilterContainer = () => {
         />
         <FilterType
           id="category"
-          title="Category"
+          title="Kateqoriya"
           filterArray={categoryArray}
           list={["PC", "Tablet", "Smartphone", "Smartwatch", "Headphones"]}
         />

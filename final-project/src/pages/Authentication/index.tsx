@@ -3,7 +3,7 @@ import Loading from "../../components/UI/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
 import { useParams } from "react-router-dom";
-import { getToken } from "../../slices/authSlice";
+import { getToken } from "../../asyncThunk";
 import { Navigate } from "react-router-dom";
 
 const Authentication = () => {
@@ -13,6 +13,7 @@ const Authentication = () => {
 
   useEffect(() => {
     dispacth(getToken(token!));
+    document.title = "Tello | Register";
   }, [dispacth, token]);
 
   if (data.rejected) return <Navigate to="/join/signup" />;

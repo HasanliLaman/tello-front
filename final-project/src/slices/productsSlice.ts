@@ -1,30 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { api } from "../server/index";
-import TypeProducts from "../models/products";
-
-export const fetchProducts = createAsyncThunk(
-  "products/fetchProducts",
-  async (limit: number = 100) => {
-    try {
-      const res = await api.get(`/products?limit=${limit}`, {
-        headers: {
-          "X-Authorization": "pk_44386608295f2dec42a0e0ec39c5a871fe0f5b0b1e1bc",
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
-      return res.data;
-    } catch (error) {
-      return error;
-    }
-  }
-);
-
-interface ProductsState {
-  loading: boolean;
-  error: null | string;
-  products: TypeProducts.RootObject;
-}
+import { createSlice } from "@reduxjs/toolkit";
+import { fetchProducts } from "../asyncThunk";
+import { ProductsState } from "../models/slices";
 
 const initialState = {
   loading: false,

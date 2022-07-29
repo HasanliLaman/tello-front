@@ -8,7 +8,7 @@ import ProductContainer from "../../components/Products/ProductContainer";
 import StyleHomepage from "./style";
 import { AppDispatch } from "../../store";
 import { useDispatch } from "react-redux";
-import { fetchProducts } from "../../slices/productsSlice";
+import { fetchProducts } from "../../asyncThunk";
 import { useLocation } from "react-router-dom";
 
 const Homepage = () => {
@@ -18,6 +18,7 @@ const Homepage = () => {
   useEffect(() => {
     dispatch(fetchProducts());
     window.scrollTo(0, 0);
+    document.title = "Tello";
   }, [dispatch, location]);
 
   return (

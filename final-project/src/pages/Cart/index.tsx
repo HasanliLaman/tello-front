@@ -13,6 +13,7 @@ const Cart = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    document.title = "Tello | Cart";
   }, [location]);
 
   return (

@@ -1,18 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-interface TypeCart {
-  price: string;
-  id: string;
-  img: string;
-  name: string;
-  quantity: number;
-}
-
-interface TypeInitial {
-  products: TypeCart[];
-  totalQuantity: number;
-  totalPrice: number;
-}
+import { TypeInitial } from "../models/slices";
 
 const initialState: TypeInitial = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart")!)

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import BasketEmpty from "../../components/BasketEmpty";
 import Container from "../../components/UI/Container";
 import UserProfile from "../../components/UserProfile";
@@ -9,6 +9,10 @@ import { Navigate } from "react-router-dom";
 
 const Dashboard = () => {
   const data = useSelector((state: RootState) => state.auth);
+
+  useEffect(() => {
+    document.title = "Tello | Dashboard";
+  }, []);
 
   if (!data.loggedIn) return <Navigate to="/join/signup" />;
 

@@ -6,7 +6,7 @@ import Overlay from "../../UI/Overlay";
 import Container from "../../UI/Container";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState, AppDispatch } from "../../../store";
-import { fetchCategories } from "../../../slices/categoriesSlice";
+import { fetchCategories } from "../../../asyncThunk";
 import { changeBrandList, clearFilter } from "../../../slices/filterSlice";
 import TypeCategories from "../../../models/categories";
 import { NavLink } from "react-router-dom";

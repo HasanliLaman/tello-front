@@ -1,34 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { api } from "../server/index";
-
-export const getToken = createAsyncThunk(
-  "auth/getToken",
-  async (token: string) => {
-    try {
-      const res = await api.post(
-        `/customers/exchange-token`,
-        { token },
-        {
-          headers: {
-            "X-Authorization":
-              "pk_44386608295f2dec42a0e0ec39c5a871fe0f5b0b1e1bc",
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      if (!res.data.jwt) throw new Error("Link is not valid anymore!");
-      return res.data;
-    } catch (error) {
-      return error;
-    }
-  }
-);
-
-interface AuthState {
-  loggedIn: boolean;
-  rejected: boolean;
-}
+import { createSlice } from "@reduxjs/toolkit";
+import { getToken } from "../asyncThunk";
+import { AuthState } from "../models/slices";
 
 const initialState = {
   loggedIn: localStorage.getItem("token") ? true : false,

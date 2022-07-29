@@ -24,7 +24,6 @@ const CartProduct: React.FC<{ info: Props }> = ({ info }) => {
 
   return (
     <StyleCartProduct>
-      <input type="checkbox" />
       <div className="details">
         <img src={info.img} alt="phone" />
         <p>{info.name}</p>

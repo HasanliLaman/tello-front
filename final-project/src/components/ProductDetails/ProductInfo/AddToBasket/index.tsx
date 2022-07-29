@@ -11,7 +11,7 @@ const AddToBasket = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const addProduct = () => {
-    toast.success("Product is added!");
+    toast.success("Product is added to basket!");
     dispatch(
       addToBasket({
         name: data.product.name,

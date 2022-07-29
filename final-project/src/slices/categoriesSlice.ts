@@ -1,29 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { api } from "../server/index";
-import TypeCategories from "../models/categories";
-
-export const fetchCategories = createAsyncThunk(
-  "categories/fetchCategories",
-  async () => {
-    try {
-      const res = await api.get("/categories", {
-        headers: {
-          "X-Authorization": "pk_44386608295f2dec42a0e0ec39c5a871fe0f5b0b1e1bc",
-        },
-      });
-      return res.data;
-    } catch (error) {
-      return error;
-    }
-  }
-);
-
-interface CategoriesState {
-  loading: boolean;
-  error: null | string;
-  categories: TypeCategories.RootObject;
-  subcategories: TypeCategories.Child;
-}
+import { createSlice } from "@reduxjs/toolkit";
+import { fetchCategories } from "../asyncThunk";
+import { CategoriesState } from "../models/slices";
 
 const initialState = {
   loading: false,

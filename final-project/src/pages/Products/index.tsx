@@ -4,7 +4,7 @@ import ProductsMain from "../../components/Products/ProductsMain";
 import PagePath from "../../components/PagePath";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store";
-import { fetchProducts } from "../../slices/productsSlice";
+import { fetchProducts } from "../../asyncThunk";
 import { useLocation } from "react-router-dom";
 
 const Products = () => {
@@ -14,11 +14,12 @@ const Products = () => {
   useEffect(() => {
     dispatch(fetchProducts());
     window.scrollTo(0, 0);
+    document.title = "Tello | Products";
   }, [dispatch, location]);
 
   return (
     <StyleProducts>
-      <PagePath path="Products" />
+      <PagePath path="Məhsullar" products={false} />
       <ProductsMain />
     </StyleProducts>
   );

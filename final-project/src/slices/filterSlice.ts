@@ -1,17 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import TypeProducts from "../models/products";
+import { FilterState } from "../models/slices";
 
-interface TypeInitial {
-  isOpenFilter: boolean;
-  isOpenOrder: boolean;
-  selectedOption: string;
-  brandList: string[];
-  categoryList: string[];
-  priceList: string[];
-  displayedProducts: TypeProducts.Datum[];
-}
-
-const initialState: TypeInitial = {
+const initialState: FilterState = {
   isOpenFilter: false,
   isOpenOrder: false,
   selectedOption: "Ən yenilər",

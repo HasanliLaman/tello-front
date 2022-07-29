@@ -14,6 +14,7 @@ import Dashboard from "./pages/Dashboard";
 import Authentication from "./pages/Authentication";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Error from "./pages/Error";
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
             <Route path="login" element={<LogIn />} />
             <Route path="signup" element={<SignUp />} />
           </Route>
+          <Route path="*" element={<Error />} />
         </Routes>
         <FooterMain />
       </div>
