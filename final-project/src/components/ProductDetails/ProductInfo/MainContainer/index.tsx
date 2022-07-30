@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Container from "../../../UI/Container";
 import ImageGalleryContainer from "../../ImageGallery";
 import AddToBasket from "../AddToBasket";
@@ -7,14 +7,28 @@ import ProductVariants from "../ProductVariants";
 import StyleMainContainer from "./style";
 
 const MainContainer = () => {
+  const [selectedColor, setSelectedColor] = useState(0);
+  const [selectedStorage, setSelectedStorage] = useState(0);
+
   return (
     <StyleMainContainer>
       <Container>
-        <ImageGalleryContainer />
+        <ImageGalleryContainer selectedColor={selectedColor} />
         <div>
-          <ProductData />
-          <ProductVariants />
-          <AddToBasket />
+          <ProductData
+            setSelectedStorage={setSelectedStorage}
+            selectedStorage={selectedStorage}
+          />
+          <ProductVariants
+            selectedColor={selectedColor}
+            setSelectedColor={setSelectedColor}
+            setSelectedStorage={setSelectedStorage}
+            selectedStorage={selectedStorage}
+          />
+          <AddToBasket
+            selectedColor={selectedColor}
+            selectedStorage={selectedStorage}
+          />
         </div>
       </Container>
     </StyleMainContainer>

@@ -22,6 +22,10 @@ const StyleProductVariants = styled.div`
     }
   }
 
+  .variant-active {
+    border: 2px solid var(--color-green);
+  }
+
   .color div {
     width: 32px;
     height: 32px;

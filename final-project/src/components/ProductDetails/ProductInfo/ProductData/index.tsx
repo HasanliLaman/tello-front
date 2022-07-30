@@ -4,7 +4,10 @@ import stars from "../../../../assets/images/comment-review.svg";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store";
 
-const ProductData = () => {
+const ProductData: React.FC<{
+  setSelectedStorage: (el: number) => void;
+  selectedStorage: number;
+}> = ({ setSelectedStorage, selectedStorage }) => {
   const data = useSelector((state: RootState) => state.product);
 
   return (
@@ -27,7 +30,10 @@ const ProductData = () => {
           </svg>
         </span> */}
         <p>
-          {data.product.price.raw}
+          {data.product.variant_groups[1]
+            ? data.product.variant_groups.find((el) => el.name === "Storage")!
+                .options[selectedStorage].price.raw + data.product.price.raw
+            : data.product.price.raw}
           <svg
             width="18"
             viewBox="0 0 18 15"

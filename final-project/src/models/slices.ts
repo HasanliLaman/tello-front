@@ -13,6 +13,7 @@ export interface TypeCart {
   img: string;
   name: string;
   quantity: number;
+  color: string;
 }
 
 export interface TypeInitial {

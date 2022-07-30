@@ -4,19 +4,30 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../../store";
 import { RootObject } from "../../../../models/productInfo";
 
-const ProductVariants = () => {
+const ProductVariants: React.FC<{
+  setSelectedColor: (el: number) => void;
+  selectedColor: number;
+  setSelectedStorage: (el: number) => void;
+  selectedStorage: number;
+}> = ({
+  setSelectedColor,
+  selectedColor,
+  setSelectedStorage,
+  selectedStorage,
+}) => {
   const data = useSelector((state: RootState) => state.product);
 
   const getVariants = function (products: RootObject) {
-    console.log(products);
     if (products.variant_groups[0]) {
       const vars = products.variant_groups.map((variant) => {
         if (variant.name === "Color") {
           return (
             <div className="color">
               <h2>Rəng:</h2>
-              {variant.options.map((el) => (
+              {variant.options.map((el, index) => (
                 <div
+                  className={index === selectedColor ? "variant-active" : ""}
+                  onClick={() => setSelectedColor(index)}
                   key={el.name}
                   style={{ background: `${el.name.toLowerCase()}` }}
                 ></div>
@@ -27,8 +38,14 @@ const ProductVariants = () => {
           return (
             <div className="storage">
               <h2>Yaddaş:</h2>
-              {variant.options.map((el) => (
-                <div key={el.name}>{el.name}</div>
+              {variant.options.map((el, index) => (
+                <div
+                  className={index === selectedStorage ? "variant-active" : ""}
+                  onClick={() => setSelectedStorage(index)}
+                  key={el.name}
+                >
+                  {el.name}
+                </div>
               ))}
             </div>
           );

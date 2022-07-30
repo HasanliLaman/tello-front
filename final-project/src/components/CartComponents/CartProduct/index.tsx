@@ -17,6 +17,7 @@ interface Props {
   name: string;
   price: string;
   img: string;
+  color: string;
 }
 
 const CartProduct: React.FC<{ info: Props }> = ({ info }) => {
@@ -28,7 +29,7 @@ const CartProduct: React.FC<{ info: Props }> = ({ info }) => {
         <img src={info.img} alt="phone" />
         <p>{info.name}</p>
         <div className="variant">
-          <span>Rəng:</span> <p>Silver</p>
+          <span>Rəng:</span> <p>{info.color}</p>
         </div>
         <div className="price">
           <p>{info.price}</p>

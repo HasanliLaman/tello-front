@@ -5,20 +5,30 @@ import { RootState, AppDispatch } from "../../../../store";
 import { addToBasket, setLocalStorage } from "../../../../slices/cartSlice";
 import { toast } from "react-toastify";
 
-const AddToBasket = () => {
+const AddToBasket: React.FC<{
+  selectedColor: number;
+  selectedStorage: number;
+}> = ({ selectedColor, selectedStorage }) => {
   const data = useSelector((state: RootState) => state.product);
   const [count, setCount] = useState<number>(1);
   const dispatch = useDispatch<AppDispatch>();
 
   const addProduct = () => {
-    toast.success("Product is added to basket!");
+    toast.success("Məhsul səbətə əlavə olundu!");
     dispatch(
       addToBasket({
         name: data.product.name,
         id: data.product.id,
-        price: data.product.price.raw,
+        price: data.product.variant_groups[1]
+          ? data.product.variant_groups.find((el) => el.name === "Storage")!
+              .options[selectedStorage].price.raw + data.product.price.raw
+          : data.product.price.raw,
         img: data.product.image.url,
         quantity: count,
+        color: data.product.variant_groups[0]
+          ? data.product.variant_groups.find((el) => el.name === "Color")!
+              .options[selectedColor].name
+          : "Standart",
       })
     );
     dispatch(setLocalStorage());
