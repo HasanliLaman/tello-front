@@ -1,7 +1,8 @@
 import React from "react";
 import eye from "../../../assets/images/icon-eye.svg";
 import { signUpSchema } from "../../../schemas";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
+import NumberFormat from "react-number-format";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { api } from "../../../server";
 import { useNavigate } from "react-router-dom";
@@ -19,6 +20,7 @@ const SignUpForm = () => {
   const navigate = useNavigate();
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors },
     reset,
@@ -94,11 +96,18 @@ const SignUpForm = () => {
             <option>050</option>
             <option>055</option>
           </select>
-          <input
-            type="text"
-            {...register("phone")}
-            placeholder="000 - 00 - 00"
-            id="phone"
+          <Controller
+            control={control}
+            name="phone"
+            defaultValue="0000000"
+            render={({ field: { onChange, name, value } }) => (
+              <NumberFormat
+                format="### - ## - ##"
+                name={name}
+                value={value}
+                onChange={onChange}
+              />
+            )}
           />
         </div>
         {errors.phone?.message && <p>{errors.phone?.message}</p>}

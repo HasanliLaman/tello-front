@@ -1,32 +1,32 @@
 import * as yup from "yup";
 
 export const signUpSchema = yup.object().shape({
-  name: yup.string().required("This field is required."),
+  name: yup.string().required("Bu sahə doldurulmalıdır."),
   email: yup
     .string()
-    .email("Wrong email format.")
-    .required("This field is required."),
+    .email("Yanlış email formatı.")
+    .required("Bu sahə doldurulmalıdır."),
   phone: yup
     .string()
-    .min(7, "Wrong number format.")
-    .max(7, "Wrong number format.")
-    .required("This field is required."),
+    .min(13, "Yanlış mobil nömrə formatı.")
+    .max(13, "Yanlış mobil nömrə formatı.")
+    .required("Bu sahə doldurulmalıdır."),
   password: yup
     .string()
-    .min(4, "Password length should be 4-15 characters.")
-    .max(15, "Password length should be 4-15 characters.")
-    .required("This field is required."),
-  terms: yup.bool().oneOf([true], "You should agree terms and conditions."),
+    .min(4, "Şifrə 4-15 simvol uzunluğunda olmalıdır.")
+    .max(15, "Şifrə 4-15 simvol uzunluğunda olmalıdır.")
+    .required("Bu sahə doldurulmalıdır."),
+  terms: yup.bool().oneOf([true], "Bu sahə doldurulmalıdır."),
 });
 
 export const logInSchema = yup.object().shape({
   email: yup
     .string()
-    .email("Wrong email format.")
-    .required("This field is required."),
+    .email("Yanlış email formatı.")
+    .required("Bu sahə doldurulmalıdır."),
   password: yup
     .string()
-    .min(4, "Password length should be 4-15 characters.")
-    .max(15, "Password length should be 4-15 characters.")
-    .required("This field is required."),
+    .min(4, "Şifrə 4-15 simvol uzsunluğunda olmalıdır.")
+    .max(15, "Şifrə 4-15 simvol uzunluğunda olmalıdır.")
+    .required("Bu sahə doldurulmalıdır."),
 });
