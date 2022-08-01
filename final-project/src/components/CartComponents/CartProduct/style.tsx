@@ -24,6 +24,7 @@ const StyleCartProduct = styled.div`
       text-align: center;
       grid-column: 1/3;
       padding-top: 0.4rem;
+      cursor: pointer;
     }
 
     & > img {

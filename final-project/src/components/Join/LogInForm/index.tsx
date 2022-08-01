@@ -37,13 +37,13 @@ const LogInForm = () => {
           },
         }
       );
-      toast.success("Please check your email!");
+      toast.success("Elektron poçtunuzu yoxlayın !");
       reset({
         email: "",
         password: "",
       });
     } catch (err) {
-      toast.error("Something went wrong!");
+      toast.error("Xəta baş verdi!");
     }
   };
 

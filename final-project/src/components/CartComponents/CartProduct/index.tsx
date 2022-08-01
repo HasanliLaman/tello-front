@@ -10,6 +10,7 @@ import {
   decreaseQuantity,
   setLocalStorage,
 } from "../../../slices/cartSlice";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   id: string;
@@ -22,12 +23,15 @@ interface Props {
 
 const CartProduct: React.FC<{ info: Props }> = ({ info }) => {
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
   return (
     <StyleCartProduct>
       <div className="details">
         <img src={info.img} alt="phone" />
-        <p>{info.name}</p>
+        <p className="name" onClick={() => navigate(`/products/${info.id}`)}>
+          {info.name}
+        </p>
         <div className="variant">
           <span>Rəng:</span> <p>{info.color}</p>
         </div>

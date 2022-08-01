@@ -49,7 +49,7 @@ const SignUpForm = () => {
         }
       );
 
-      toast.success("Registiration is successful!");
+      toast.success("Qeydiyyat tamamlandı!");
       navigate("../login");
 
       reset({
@@ -60,7 +60,7 @@ const SignUpForm = () => {
         phone: "",
       });
     } catch (err) {
-      toast.error("This email has been registered!");
+      toast.error("Bu email ünvanı qeydiyyatda var!");
     }
   };
 

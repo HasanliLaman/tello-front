@@ -50,3 +50,7 @@ export interface ProductsState {
   error: null | string;
   products: TypeProducts.RootObject;
 }
+
+export interface SearchState {
+  searchHistory: string[];
+}

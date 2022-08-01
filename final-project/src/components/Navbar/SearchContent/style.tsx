@@ -43,6 +43,7 @@ const StyleSearchContent = styled.div`
       padding: 0.2rem 0.6rem;
       background: #edf1f7;
       border-radius: 4px;
+      cursor: pointer;
     }
   }
 
@@ -117,9 +118,12 @@ const StyleSearchContent = styled.div`
     overflow: hidden;
 
     .suggestions {
+      max-height: 200px;
+      overflow-y: auto;
+
       ul {
         gap: 2.4rem;
-        padding-bottom: 4rem;
+        padding-bottom: 1rem;
       }
 
       p {

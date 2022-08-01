@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import StyleNavSearch from "./style";
 import SearchContent from "../SearchContent";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../store";
+import { changeHistory } from "../../../slices/searchSlice";
 
 const NavSearch: React.FC<{ className: string }> = (props) => {
+  const [open, setOpen] = useState(false);
+  const [input, setInput] = useState("");
+  const [timerId, setTimerId] = useState<any>();
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleInputChange = function (e: React.ChangeEvent<HTMLInputElement>) {
+    clearTimeout(timerId);
+    setInput(e.target.value);
+    const timer = setTimeout(function () {
+      if (e.target.value) dispatch(changeHistory(e.target.value));
+    }, 2000);
+    setTimerId(timer);
+  };
+
   return (
     <StyleNavSearch className={props.className}>
       <svg
@@ -21,8 +38,18 @@ const NavSearch: React.FC<{ className: string }> = (props) => {
           fill="#828282"
         />
       </svg>
-      <input type="text" placeholder="Axtarış..." />
-      {/* <SearchContent /> */}
+      <input
+        value={input}
+        onChange={handleInputChange}
+        onFocus={() => setOpen(true)}
+        onBlur={() => {
+          setOpen(false);
+          setInput("");
+        }}
+        type="text"
+        placeholder="Axtarış..."
+      />
+      {open && <SearchContent input={input} setInput={setInput} />}
     </StyleNavSearch>
   );
 };

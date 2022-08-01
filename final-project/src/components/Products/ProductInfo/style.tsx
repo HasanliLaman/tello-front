@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const StyleProductInfo = styled.div<{ discount: boolean }>`
+  cursor: pointer;
   font-size: 1.4rem;
   line-height: 2rem;
   box-shadow: 0px 4px 8px rgba(164, 164, 164, 0.16);
@@ -10,6 +11,11 @@ const StyleProductInfo = styled.div<{ discount: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 1.8rem;
+  transition: 0.3s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 
   img {
     width: 101px;

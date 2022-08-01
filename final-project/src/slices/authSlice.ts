@@ -18,19 +18,14 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getToken.fulfilled, (state, action) => {
-      if (action.payload.jwt) {
-        localStorage.setItem("token", action.payload.jwt);
-        return { loggedIn: true, rejected: false };
-      } else {
-        localStorage.removeItem("token");
-        return { loggedIn: false, rejected: true };
-      }
+      localStorage.setItem("token", action.payload.jwt);
+      return { loggedIn: true, rejected: false };
     });
 
-    builder.addCase(getToken.rejected, (state, action) => ({
-      loggedIn: false,
-      rejected: true,
-    }));
+    builder.addCase(getToken.rejected, (state, action) => {
+      localStorage.removeItem("token");
+      return { loggedIn: false, rejected: true };
+    });
   },
 });
 
