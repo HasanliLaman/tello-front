@@ -1,6 +1,5 @@
 import React from "react";
 import StyleSearchContent from "./style";
-import img from "../../../assets/images/temp.png";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../../../store";
 import { deleteHistory } from "../../../slices/searchSlice";
