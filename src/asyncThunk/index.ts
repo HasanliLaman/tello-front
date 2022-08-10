@@ -46,7 +46,7 @@ export const fetchCategories = createAsyncThunk(
 //productSlice
 export const fetchProduct = createAsyncThunk(
   "product/fetchProduct",
-  async (id: string | undefined) => {
+  async (id?: string) => {
     try {
       const res = await api.get(`/products/${id}`, {
         headers: {
