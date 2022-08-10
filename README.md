@@ -1,4 +1,4 @@
-# Tech Academy - SE Final Academy
+# Tech Academy - SE Final Project
 
 ## Table of contents
 
