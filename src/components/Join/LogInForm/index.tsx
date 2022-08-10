@@ -27,7 +27,7 @@ const LogInForm = () => {
         `/customers/email-token`,
         {
           email: data.email,
-          base_url: "http://localhost:3000/dashboard",
+          base_url: "https://se-final-project.netlify.app/dashboard",
         },
         {
           headers: {
