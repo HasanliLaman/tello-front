@@ -12,6 +12,26 @@ const StyleProductInfo = styled.div<{ discount: boolean }>`
   flex-direction: column;
   gap: 1.8rem;
   transition: 0.3s;
+  position: relative;
+
+  .favorite {
+    position: absolute;
+    top: 0.8rem;
+    right: 0.8rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid #f2f2f2;
+    background-color: var(--color-white);
+    cursor: pointer;
+
+    &.active svg path {
+      fill: var(--color-green);
+    }
+  }
 
   &:hover {
     transform: scale(1.05);

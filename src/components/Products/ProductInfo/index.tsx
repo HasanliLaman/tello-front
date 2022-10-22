@@ -1,10 +1,34 @@
-import React from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import StyleProductInfo from "./style";
 import { useNavigate } from "react-router-dom";
 import { Product } from "../../../models/productInfo";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "../../../store";
+import {
+  addToList,
+  removeFromList,
+  setLocalStorage,
+} from "../../../slices/favoriteSlice";
 
 const ProductInfo: React.FC<{ info: Product }> = ({ info }) => {
   const navigate = useNavigate();
+  const [favorite, setFavorite] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
+  const { list } = useSelector((state: RootState) => state.favorites);
+
+  const listMemoized = useMemo(() => list, [list]);
+
+  useEffect(() => {
+    if (listMemoized.find((el) => el._id === info._id)) setFavorite(true);
+    else setFavorite(false);
+  }, [info._id, listMemoized]);
+
+  const addToFavorites = (e) => {
+    e.stopPropagation();
+    if (list.find((el) => el._id === info._id)) dispatch(removeFromList(info));
+    else dispatch(addToList(info));
+    dispatch(setLocalStorage());
+  };
 
   const goToProduct = function () {
     navigate(`/products/${info._id}`);
@@ -12,6 +36,25 @@ const ProductInfo: React.FC<{ info: Product }> = ({ info }) => {
 
   return (
     <StyleProductInfo onClick={goToProduct} id={info._id} discount={false}>
+      <div
+        onClick={addToFavorites}
+        className={favorite ? "favorite active" : "favorite"}
+      >
+        <svg
+          width="20"
+          height="17"
+          viewBox="0 0 22 17"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M6.22005 2C5.35605 2 4.54605 2.334 3.94005 2.941C2.68205 4.201 2.68205 6.252 3.94105 7.514L11 14.585L18.06 7.514C19.319 6.252 19.319 4.201 18.06 2.941C16.848 1.726 14.712 1.728 13.5 2.941L11.708 4.736C11.332 5.113 10.668 5.113 10.292 4.736L8.50005 2.94C7.89405 2.334 7.08505 2 6.22005 2ZM11 17C10.735 17 10.48 16.895 10.293 16.706L2.52505 8.926C0.489047 6.886 0.489047 3.567 2.52505 1.527C3.50905 0.543 4.82105 0 6.22005 0C7.61905 0 8.93205 0.543 9.91505 1.527L11 2.614L12.085 1.528C13.069 0.543 14.381 0 15.781 0C17.179 0 18.492 0.543 19.475 1.527C21.512 3.567 21.512 6.886 19.476 8.926L11.708 16.707C11.52 16.895 11.266 17 11 17Z"
+            fill="#8F9BB3"
+          />
+        </svg>
+      </div>
       <img src={info.image.url} alt="Product" />
       <h3>{info.name}</h3>
       <div>

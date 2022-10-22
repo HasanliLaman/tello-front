@@ -1,6 +1,6 @@
 import TypeCategories from "../models/categories";
 import TypeProducts from "../models/products";
-import { RootObject } from "../models/productInfo";
+import { RootObject, Product } from "../models/productInfo";
 import { RootObjectCart } from "../models/cart";
 
 export interface AuthState {
@@ -38,6 +38,10 @@ export interface FilterState {
   error: null | string;
   query: string;
   displayedProducts: TypeProducts.Product[];
+}
+
+export interface FavoritesState {
+  list: Product[];
 }
 
 export interface ProductState {
