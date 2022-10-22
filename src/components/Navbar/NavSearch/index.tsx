@@ -4,6 +4,7 @@ import SearchContent from "../SearchContent";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../store";
 import { changeHistory } from "../../../slices/searchSlice";
+import { fetchSearch } from "../../../asyncThunk";
 
 const NavSearch: React.FC<{ className: string }> = (props) => {
   const [open, setOpen] = useState(false);
@@ -16,6 +17,7 @@ const NavSearch: React.FC<{ className: string }> = (props) => {
     setInput(e.target.value);
     const timer = setTimeout(function () {
       if (e.target.value) dispatch(changeHistory(e.target.value));
+      dispatch(fetchSearch(e.target.value));
     }, 2000);
     setTimerId(timer);
   };

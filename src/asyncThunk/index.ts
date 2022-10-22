@@ -59,6 +59,20 @@ export const fetchProducts = createAsyncThunk(
   }
 );
 
+//searchSlice
+export const fetchSearch = createAsyncThunk(
+  "search/fetchSearch",
+  async (query: string) => {
+    try {
+      const res = await api.get(`/products/search?name=${query}`);
+
+      return res.data.data.products;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
 // filterSlice
 export const fetchFilter = createAsyncThunk(
   "filter/fetchFilter",

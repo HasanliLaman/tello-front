@@ -64,4 +64,7 @@ export interface ProductsState {
 
 export interface SearchState {
   searchHistory: string[];
+  loading: boolean;
+  error: string | null;
+  products: Product[];
 }

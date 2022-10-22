@@ -1,10 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { SearchState } from "../models/slices";
+import { fetchSearch } from "../asyncThunk";
 
 const initialState = {
   searchHistory: localStorage.getItem("searchHistory")
     ? JSON.parse(localStorage.getItem("searchHistory")!)
     : [],
+  products: [],
+  loading: false,
+  error: null,
 } as SearchState;
 
 export const searchSlice = createSlice({
@@ -31,6 +35,23 @@ export const searchSlice = createSlice({
         JSON.stringify(state.searchHistory)
       );
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchSearch.fulfilled, (state, action) => ({
+      ...state,
+      loading: false,
+      products: action.payload,
+      error: "",
+    }));
+    builder.addCase(fetchSearch.pending, (state, action) => ({
+      ...state,
+      loading: true,
+    }));
+    builder.addCase(fetchSearch.rejected, (state, action) => ({
+      ...state,
+      loading: false,
+      error: "Something went wrong!",
+    }));
   },
 });
 
