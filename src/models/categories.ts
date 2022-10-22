@@ -1,43 +1,31 @@
 declare module namespace {
-  export interface Child {
-    id: string;
-    slug: string;
+  export interface Subcategory {
+    _id: string;
     name: string;
-    assets: any[];
-  }
-
-  export interface Datum {
-    id: string;
-    parent_id?: any;
     slug: string;
+    subcategories?: any;
+    createdAt: Date;
+    updatedAt: Date;
+    __v: number;
+  }
+
+  export interface Category {
+    _id: string;
     name: string;
-    description?: any;
-    products: number;
-    created: number;
-    updated: number;
-    meta?: any;
-    assets: any[];
-    children: Child[];
+    slug: string;
+    subcategories: Subcategory[];
+    createdAt: Date;
+    updatedAt: Date;
   }
 
-  export interface Links {}
-
-  export interface Pagination {
-    total: number;
-    count: number;
-    per_page: number;
-    current_page: number;
-    total_pages: number;
-    links: Links;
-  }
-
-  export interface Meta {
-    pagination: Pagination;
+  export interface Data {
+    categories: Category[];
   }
 
   export interface RootObject {
-    data: Datum[];
-    meta: Meta;
+    status: string;
+    length: number;
+    data: Data;
   }
 }
 

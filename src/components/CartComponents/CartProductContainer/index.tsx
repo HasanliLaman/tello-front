@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CartProduct from "../CartProduct";
 import CartSummary from "../CartSummary";
 import StyleCartProductContainer from "./style";
@@ -6,16 +6,22 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
 
 const CartProductContainer = () => {
-  const data = useSelector((state: RootState) => state.cart);
+  const cart = useSelector((state: RootState) => state.cart);
+  const auth = useSelector((state: RootState) => state.auth);
+  const userCart = useSelector((state: RootState) => state.userCart);
 
   return (
     <StyleCartProductContainer>
       <div className="products">
-        {data.products.map((el) => (
-          <CartProduct key={el.id} info={el} />
-        ))}
+        {auth.loggedIn
+          ? userCart.cart.products.map((el) => (
+              <CartProduct key={el._id} info={el} />
+            ))
+          : cart.products.map((el) => <CartProduct key={el.id} info={el} />)}
       </div>
-      <CartSummary price={data.totalPrice} />
+      <CartSummary
+        price={auth.loggedIn ? userCart.cart.totalPrice : cart.totalPrice}
+      />
     </StyleCartProductContainer>
   );
 };

@@ -15,10 +15,7 @@ const MainContainer = () => {
       <Container>
         <ImageGalleryContainer selectedColor={selectedColor} />
         <div>
-          <ProductData
-            setSelectedStorage={setSelectedStorage}
-            selectedStorage={selectedStorage}
-          />
+          <ProductData />
           <ProductVariants
             selectedColor={selectedColor}
             setSelectedColor={setSelectedColor}

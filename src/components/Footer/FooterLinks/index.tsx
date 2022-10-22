@@ -6,7 +6,7 @@ import FooterList from "../FooterList";
 const FooterLinks: React.FC<{
   links: boolean;
   header: string;
-  items: { name: string; slug: string }[];
+  items: { name: string; id: string }[];
   base: string;
 }> = (props) => {
   return (

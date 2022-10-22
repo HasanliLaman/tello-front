@@ -4,6 +4,7 @@ import productsReducer from "../slices/productsSlice";
 import filterReducer from "../slices/filterSlice";
 import productReducer from "../slices/productSlice";
 import cartReducer from "../slices/cartSlice";
+import userCartReducer from "../slices/userCartSlice";
 import authReducer from "../slices/authSlice";
 import searchReducer from "../slices/searchSlice";
 
@@ -14,6 +15,7 @@ export const store = configureStore({
     filter: filterReducer,
     product: productReducer,
     cart: cartReducer,
+    userCart: userCartReducer,
     auth: authReducer,
     search: searchReducer,
   },

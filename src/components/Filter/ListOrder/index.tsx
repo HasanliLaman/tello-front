@@ -33,7 +33,6 @@ const ListOrder = () => {
       </svg>
       <ul className={isOpen ? "active" : ""}>
         <li onClick={changeSelected}>Ən yenilər</li>
-        <li onClick={changeSelected}>Ən çox satılan</li>
         <li onClick={changeSelected}>Ucuzdan bahalıya</li>
         <li onClick={changeSelected}>Bahalıdan ucuza</li>
       </ul>

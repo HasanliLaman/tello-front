@@ -10,9 +10,9 @@ const ProductsPagination: React.FC<{ itemsPerPage: number }> = ({
   itemsPerPage,
 }) => {
   const { displayedProducts } = useSelector((state: RootState) => state.filter);
-  const [currentItems, setCurrentItems] = useState<TypeProducts.Datum[] | null>(
-    null
-  );
+  const [currentItems, setCurrentItems] = useState<
+    TypeProducts.Product[] | null
+  >(null);
 
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);

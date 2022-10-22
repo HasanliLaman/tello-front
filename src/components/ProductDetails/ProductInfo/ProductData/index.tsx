@@ -4,15 +4,12 @@ import stars from "../../../../assets/images/comment-review.svg";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store";
 
-const ProductData: React.FC<{
-  setSelectedStorage: (el: number) => void;
-  selectedStorage: number;
-}> = ({ setSelectedStorage, selectedStorage }) => {
+const ProductData = () => {
   const data = useSelector((state: RootState) => state.product);
 
   return (
     <StyleProductData>
-      <p>{data.product.name}</p>
+      <p>{data.product.data.product.name}</p>
       <div className="comment">
         <img alt="review" src={stars} />
         <span>(226)</span>
@@ -30,10 +27,7 @@ const ProductData: React.FC<{
           </svg>
         </span> */}
         <p>
-          {data.product.variant_groups[1]
-            ? data.product.variant_groups.find((el) => el.name === "Storage")!
-                .options[selectedStorage].price.raw + data.product.price.raw
-            : data.product.price.raw}
+          {data.product.data.product.price}
           <svg
             width="18"
             viewBox="0 0 18 15"

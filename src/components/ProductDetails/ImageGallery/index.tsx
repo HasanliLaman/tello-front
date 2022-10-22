@@ -9,16 +9,23 @@ const ImageGalleryContainer: React.FC<{ selectedColor: number }> = ({
   selectedColor,
 }) => {
   const data = useSelector((state: RootState) => state.product);
-  const images = data.product.variant_groups[0]
-    ? data.product.variant_groups
-        .find((el) => el.name === "Color")!
-        .options[selectedColor].assets.map((color) => {
-          const asset = data.product.assets.find((as) => as.id === color);
-          return { original: asset!.url, thumbnail: asset!.url };
-        })
-    : data.product.assets.map((el: Image) => {
-        return { original: el.url, thumbnail: el.url };
-      });
+  const product = data.product.data.product;
+  const imagesWithoutVariants = data.product.data.product.assets.map(
+    (el: Image) => {
+      return { original: el.url, thumbnail: el.url };
+    }
+  );
+  const imagesWithVariants = data.product.data.product.assets
+    .slice(
+      (product.assets.length * selectedColor) / product.colors.length,
+      (product.assets.length * selectedColor) / product.colors.length +
+        product.assets.length / product.colors.length
+    )
+    .map((el: Image) => {
+      return { original: el.url, thumbnail: el.url };
+    });
+
+  const images = product.colors[0] ? imagesWithVariants : imagesWithoutVariants;
 
   return (
     <StyleImageGallery>

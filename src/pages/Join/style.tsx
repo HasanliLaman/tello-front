@@ -16,6 +16,10 @@ const StyleJoin = styled.section`
     text-align: center;
   }
 
+  .btn-reset {
+    margin-top: 3.2rem;
+  }
+
   form {
     & > p {
       font-weight: 500;

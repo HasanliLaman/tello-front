@@ -20,15 +20,15 @@ const ProductsInfo = () => {
     dispatch(fetchProduct(productId));
     if (data.error) navigate("/not-found");
     window.scrollTo(0, 0);
-    document.title = "Tello | Product Info";
+    document.title = "Tello | Məhsul haqqında";
   }, [dispatch, productId, location, data.error, navigate]);
 
   return (
     <div>
-      {!data.product.id && <Loading padding={false} height={true} />}
-      {data.product.id && (
+      {!data.product.data && <Loading padding={false} height={true} />}
+      {data.product.data && (
         <>
-          <PagePath path={data.product.name} products={true} />
+          <PagePath path={data.product.data.product.name} products={true} />
           <MainContainer />
           <ChangeToComments />
         </>

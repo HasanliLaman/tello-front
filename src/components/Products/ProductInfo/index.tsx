@@ -1,17 +1,17 @@
 import React from "react";
 import StyleProductInfo from "./style";
 import { useNavigate } from "react-router-dom";
-import { RootObject } from "../../../models/productInfo";
+import { Product } from "../../../models/productInfo";
 
-const ProductInfo: React.FC<{ info: RootObject }> = ({ info }) => {
+const ProductInfo: React.FC<{ info: Product }> = ({ info }) => {
   const navigate = useNavigate();
 
   const goToProduct = function () {
-    navigate(`/products/${info.id}`);
+    navigate(`/products/${info._id}`);
   };
 
   return (
-    <StyleProductInfo onClick={goToProduct} id={info.id} discount={false}>
+    <StyleProductInfo onClick={goToProduct} id={info._id} discount={false}>
       <img src={info.image.url} alt="Product" />
       <h3>{info.name}</h3>
       <div>
@@ -26,7 +26,7 @@ const ProductInfo: React.FC<{ info: RootObject }> = ({ info }) => {
           </svg>
         </span> */}
         <p>
-          {info.price.formatted}
+          {info.price}
           <svg
             width="18"
             viewBox="0 0 18 15"

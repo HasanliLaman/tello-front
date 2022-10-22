@@ -4,34 +4,52 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../../../../store";
 import { addToBasket, setLocalStorage } from "../../../../slices/cartSlice";
 import { toast } from "react-toastify";
+import { api } from "../../../../server";
+import { updateCart } from "../../../../slices/userCartSlice";
 
 const AddToBasket: React.FC<{
   selectedColor: number;
   selectedStorage: number;
 }> = ({ selectedColor, selectedStorage }) => {
   const data = useSelector((state: RootState) => state.product);
+  const auth = useSelector((state: RootState) => state.auth);
+
   const [count, setCount] = useState<number>(1);
   const dispatch = useDispatch<AppDispatch>();
 
-  const addProduct = () => {
-    toast.success("Məhsul səbətə əlavə olundu!");
-    dispatch(
-      addToBasket({
-        name: data.product.name,
-        id: data.product.id,
-        price: data.product.variant_groups[1]
-          ? data.product.variant_groups.find((el) => el.name === "Storage")!
-              .options[selectedStorage].price.raw + data.product.price.raw
-          : data.product.price.raw,
-        img: data.product.image.url,
-        quantity: count,
-        color: data.product.variant_groups[0]
-          ? data.product.variant_groups.find((el) => el.name === "Color")!
-              .options[selectedColor].name
-          : "Standart",
-      })
+  const addProduct = async () => {
+    if (!auth.loggedIn) {
+      dispatch(
+        addToBasket({
+          name: data.product.data.product.name,
+          id: data.product.data.product._id,
+          price: data.product.data.product.price,
+          img: data.product.data.product.image.url,
+          quantity: count,
+          color: data.product.data.product.colors[0]
+            ? data.product.data.product.colors[selectedColor]
+            : "Standart",
+        })
+      );
+      dispatch(setLocalStorage());
+      toast.success("Məhsul səbətə əlavə olundu!");
+      return;
+    }
+
+    const res = await api.patch(
+      `/users/${localStorage.getItem("userId")}/cart/add/${
+        data.product.data.product._id
+      }`,
+      { quantity: count },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
     );
-    dispatch(setLocalStorage());
+    dispatch(updateCart(res.data.data.cart));
+
+    toast.success("Məhsul səbətə əlavə olundu!");
   };
 
   return (

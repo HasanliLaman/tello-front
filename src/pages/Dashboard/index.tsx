@@ -11,7 +11,7 @@ const Dashboard = () => {
   const data = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
-    document.title = "Tello | Dashboard";
+    document.title = "Tello | Hesabım";
   }, []);
 
   if (!data.loggedIn) return <Navigate to="/join/signup" />;

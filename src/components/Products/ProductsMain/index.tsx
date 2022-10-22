@@ -7,25 +7,18 @@ import ListOrder from "../../Filter/ListOrder";
 import ProductsPagination from "../ProductsPagination";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../../../store";
-import { changeDisplayedProducts } from "../../../slices/filterSlice";
+import { fetchFilter } from "../../../asyncThunk";
 import Loading from "../../UI/Loading";
 
 const ProductsMain = () => {
-  const filterData = useSelector((state: RootState) => state.filter);
-  const products = useSelector((state: RootState) => state.products);
+  const { displayedProducts, query, loading } = useSelector(
+    (state: RootState) => state.filter
+  );
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    if (products.products.data) {
-      dispatch(changeDisplayedProducts(products.products.data));
-    }
-  }, [
-    products,
-    filterData.brandList,
-    filterData.categoryList,
-    filterData.priceList,
-    dispatch,
-  ]);
+    dispatch(fetchFilter(query));
+  }, [query, dispatch]);
 
   return (
     <StyleProductsMain>
@@ -33,10 +26,12 @@ const ProductsMain = () => {
       <Container>
         <FilterContainer />
         <div className="details">
-          <p>{filterData.displayedProducts.length} məhsul tapıldı</p>
+          <p>{displayedProducts.length} məhsul tapıldı</p>
           <ListOrder />
-          {products.loading && <Loading padding={true} height={false} />}
-          {!products.loading && <ProductsPagination itemsPerPage={9} />}
+          {loading && <Loading padding={true} height={false} />}
+          {!loading && displayedProducts[0] && (
+            <ProductsPagination itemsPerPage={9} />
+          )}
         </div>
       </Container>
     </StyleProductsMain>

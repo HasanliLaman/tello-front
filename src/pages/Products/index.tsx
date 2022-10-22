@@ -4,7 +4,6 @@ import ProductsMain from "../../components/Products/ProductsMain";
 import PagePath from "../../components/PagePath";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store";
-import { fetchProducts } from "../../asyncThunk";
 import { useLocation } from "react-router-dom";
 
 const Products = () => {
@@ -12,9 +11,8 @@ const Products = () => {
   const location = useLocation();
 
   useEffect(() => {
-    dispatch(fetchProducts());
     window.scrollTo(0, 0);
-    document.title = "Tello | Products";
+    document.title = "Tello | Məhsullar";
   }, [dispatch, location]);
 
   return (

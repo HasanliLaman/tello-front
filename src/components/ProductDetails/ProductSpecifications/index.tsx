@@ -11,7 +11,11 @@ const ProductSpecifications = () => {
     <StyleProductSpecifications>
       <article>
         <h2>Məhsul haqqında</h2>
-        <p>{data.product.description.replace("<p>", "").replace("</p>", "")}</p>
+        <p>
+          {data.product.data.product.description
+            .replace("<p>", "")
+            .replace("</p>", "")}
+        </p>
       </article>
       <div>
         <SpecificationType title="Əsas göstəricilər" />

@@ -13,17 +13,20 @@ export const authSlice = createSlice({
   reducers: {
     logOutUser(state) {
       localStorage.removeItem("token");
+      localStorage.removeItem("userId");
       return (state = { loggedIn: false, rejected: false });
     },
   },
   extraReducers: (builder) => {
     builder.addCase(getToken.fulfilled, (state, action) => {
-      localStorage.setItem("token", action.payload.jwt);
+      localStorage.setItem("token", action.payload.token);
+      localStorage.setItem("userId", action.payload.data.user._id);
       return { loggedIn: true, rejected: false };
     });
 
     builder.addCase(getToken.rejected, (state, action) => {
       localStorage.removeItem("token");
+      localStorage.removeItem("userId");
       return { loggedIn: false, rejected: true };
     });
   },

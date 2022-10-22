@@ -1,6 +1,7 @@
 import TypeCategories from "../models/categories";
 import TypeProducts from "../models/products";
 import { RootObject } from "../models/productInfo";
+import { RootObjectCart } from "../models/cart";
 
 export interface AuthState {
   loggedIn: boolean;
@@ -26,23 +27,29 @@ export interface CategoriesState {
   loading: boolean;
   error: null | string;
   categories: TypeCategories.RootObject;
-  subcategories: TypeCategories.Child;
+  subcategories: TypeCategories.Subcategory;
 }
 
 export interface FilterState {
   isOpenFilter: boolean;
   isOpenOrder: boolean;
   selectedOption: string;
-  brandList: string[];
-  categoryList: string[];
-  priceList: string[];
-  displayedProducts: TypeProducts.Datum[];
+  loading: boolean;
+  error: null | string;
+  query: string;
+  displayedProducts: TypeProducts.Product[];
 }
 
 export interface ProductState {
   loading: boolean;
   error: null | string;
   product: RootObject;
+}
+
+export interface UserCartState {
+  loading: boolean;
+  error: null | string;
+  cart: RootObjectCart;
 }
 
 export interface ProductsState {

@@ -5,16 +5,12 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../store";
 import TypeCategories from "../../../models/categories";
-import {
-  clearFilter,
-  changeBrandList,
-  changeCategoryList,
-} from "../../../slices/filterSlice";
+import { updateQuery } from "../../../slices/filterSlice";
 
 const NavSubList: React.FC<{
   open: boolean;
   setOpen: (arg: boolean) => void;
-  items: { name: string; list: TypeCategories.Child[] };
+  items: { name: string; list: TypeCategories.Subcategory[] };
 }> = (props) => {
   const dispatch = useDispatch<AppDispatch>();
   const closeSubcategory = function () {
@@ -42,11 +38,9 @@ const NavSubList: React.FC<{
           {props.items.list.length &&
             props.items.list.map((el) => (
               <li
-                key={el.id}
+                key={el._id}
                 onClick={() => {
-                  dispatch(clearFilter());
-                  dispatch(changeBrandList(props.items.name.toLowerCase()));
-                  dispatch(changeCategoryList(el.name.toLowerCase()));
+                  dispatch(updateQuery({ field: "categories", value: el._id }));
                 }}
               >
                 <Link to={`/products`}>{el.name}</Link>

@@ -1,10 +1,10 @@
 import TypeProducts from "../models/products";
 
 export const getByCategory = (
-  data: TypeProducts.Datum[],
+  data: TypeProducts.Product[],
   categories: string[]
 ) => {
-  let filtered: TypeProducts.Datum[] = data;
+  let filtered: TypeProducts.Product[] = data;
   categories.forEach((el) => {
     filtered = [
       ...filtered.filter((element) =>

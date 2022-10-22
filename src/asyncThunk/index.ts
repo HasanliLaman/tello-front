@@ -1,26 +1,18 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { api } from "../server/index";
+import { toast } from "react-toastify";
 
 // authSlice
 export const getToken = createAsyncThunk(
   "auth/getToken",
-  async (token: string) => {
+  async (params: { url: string; body: any }) => {
     try {
-      const res = await api.post(
-        `/customers/exchange-token`,
-        { token },
-        {
-          headers: {
-            "X-Authorization":
-              "pk_44386608295f2dec42a0e0ec39c5a871fe0f5b0b1e1bc",
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      if (!res.data.jwt) throw new Error("Link is not valid anymore!");
+      const res = await api.post(`/users/${params.url}`, params.body);
       return res.data;
     } catch (error) {
+      if (params.url === "login") toast.error("Email və ya şifrə səhvdir!");
+      if (params.url === "signup")
+        toast.error("Bu email ünvanli istifadəçi mövcuddur!");
       throw error;
     }
   }
@@ -31,11 +23,7 @@ export const fetchCategories = createAsyncThunk(
   "categories/fetchCategories",
   async () => {
     try {
-      const res = await api.get("/categories", {
-        headers: {
-          "X-Authorization": "pk_44386608295f2dec42a0e0ec39c5a871fe0f5b0b1e1bc",
-        },
-      });
+      const res = await api.get("/categories");
       return res.data;
     } catch (error) {
       throw error;
@@ -48,13 +36,7 @@ export const fetchProduct = createAsyncThunk(
   "product/fetchProduct",
   async (id?: string) => {
     try {
-      const res = await api.get(`/products/${id}`, {
-        headers: {
-          "X-Authorization": "pk_44386608295f2dec42a0e0ec39c5a871fe0f5b0b1e1bc",
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await api.get(`/products/${id}`);
 
       return res.data;
     } catch (error) {
@@ -66,15 +48,9 @@ export const fetchProduct = createAsyncThunk(
 //productsSlice
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
-  async (limit: number = 100) => {
+  async () => {
     try {
-      const res = await api.get(`/products?limit=${limit}`, {
-        headers: {
-          "X-Authorization": "pk_44386608295f2dec42a0e0ec39c5a871fe0f5b0b1e1bc",
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await api.get(`/products`);
 
       return res.data;
     } catch (error) {
@@ -82,3 +58,31 @@ export const fetchProducts = createAsyncThunk(
     }
   }
 );
+
+// filterSlice
+export const fetchFilter = createAsyncThunk(
+  "filter/fetchFilter",
+  async (query: string) => {
+    try {
+      const res = await api.get(`/products${query ? "?" + query : ""}`);
+
+      return res.data.data.products;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
+// cartSlice
+export const fetchCart = createAsyncThunk("cart/fetchCart", async () => {
+  try {
+    const res = await api.get(`/users/${localStorage.getItem("userId")}/cart`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    return res.data.data.doc[0];
+  } catch (error) {
+    throw error;
+  }
+});

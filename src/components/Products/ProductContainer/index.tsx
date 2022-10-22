@@ -5,7 +5,7 @@ import Container from "../../UI/Container";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../../../store";
 import { getByCategory } from "../../../helpers/getByCategory";
-import { changeBrandList, clearFilter } from "../../../slices/filterSlice";
+import { updateQuery } from "../../../slices/filterSlice";
 import { Link } from "react-router-dom";
 import Loading from "../../UI/Loading";
 
@@ -16,19 +16,11 @@ const ProductContainer: React.FC<{
 }> = (props) => {
   const data = useSelector((state: RootState) => state.products);
 
-  const dispatch = useDispatch<AppDispatch>();
-  const navigateToProducts = function () {
-    dispatch(clearFilter);
-    for (const el of props.categories) {
-      dispatch(changeBrandList(el));
-    }
-  };
-
   return (
     <StyleProductContainer className={props.className}>
       <Container>
         <h2>{props.title}</h2>
-        <Link onClick={navigateToProducts} to="/products">
+        <Link to="/products">
           Hamısına bax
           <svg
             width="7"
@@ -46,8 +38,7 @@ const ProductContainer: React.FC<{
         <div className="products">
           {!data.products.data && <Loading padding={true} height={false} />}
           {data.products.data &&
-            getByCategory(data.products.data, props.categories)
-              .reverse()
+            getByCategory(data.products.data.products, props.categories)
               .filter((el, i) => {
                 if (i > 3) return false;
                 return true;

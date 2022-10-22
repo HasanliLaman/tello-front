@@ -6,16 +6,17 @@ export const signUpSchema = yup.object().shape({
     .string()
     .email("Yanlış email formatı.")
     .required("Bu sahə doldurulmalıdır."),
-  phone: yup
-    .string()
-    .min(13, "Yanlış mobil nömrə formatı.")
-    .max(13, "Yanlış mobil nömrə formatı.")
-    .required("Bu sahə doldurulmalıdır."),
   password: yup
     .string()
-    .min(4, "Şifrə 4-15 simvol uzunluğunda olmalıdır.")
-    .max(15, "Şifrə 4-15 simvol uzunluğunda olmalıdır.")
+    .min(6, "Şifrə 6-10 simvol uzunluğunda olmalıdır.")
+    .max(10, "Şifrə 6-10 simvol uzunluğunda olmalıdır.")
     .required("Bu sahə doldurulmalıdır."),
+  confirmPassword: yup
+    .string()
+    .oneOf(
+      [yup.ref("password"), null],
+      "Şifrə və təkrar şifrə eyni olmalıdır."
+    ),
   terms: yup.bool().oneOf([true], "Bu sahə doldurulmalıdır."),
 });
 
@@ -26,7 +27,28 @@ export const logInSchema = yup.object().shape({
     .required("Bu sahə doldurulmalıdır."),
   password: yup
     .string()
-    .min(4, "Şifrə 4-15 simvol uzsunluğunda olmalıdır.")
-    .max(15, "Şifrə 4-15 simvol uzunluğunda olmalıdır.")
+    .min(6, "Şifrə 6-10 simvol uzunluğunda olmalıdır.")
+    .max(10, "Şifrə 6-10 simvol uzunluğunda olmalıdır.")
     .required("Bu sahə doldurulmalıdır."),
+});
+
+export const forgetPasswordSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email("Yanlış email formatı.")
+    .required("Bu sahə doldurulmalıdır."),
+});
+
+export const resetPasswordSchema = yup.object().shape({
+  password: yup
+    .string()
+    .min(6, "Şifrə 6-10 simvol uzunluğunda olmalıdır.")
+    .max(10, "Şifrə 6-10 simvol uzunluğunda olmalıdır.")
+    .required("Bu sahə doldurulmalıdır."),
+  confirmPassword: yup
+    .string()
+    .oneOf(
+      [yup.ref("password"), null],
+      "Şifrə və təkrar şifrə eyni olmalıdır."
+    ),
 });

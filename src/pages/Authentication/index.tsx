@@ -12,7 +12,6 @@ const Authentication = () => {
   const { token } = useParams();
 
   useEffect(() => {
-    dispacth(getToken(token!));
     document.title = "Tello | Register";
   }, [dispacth, token]);
 

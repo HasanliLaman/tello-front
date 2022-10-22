@@ -5,11 +5,10 @@ import StyleFilterType from "./style";
 interface Props {
   title: string;
   id: string;
-  list: string[];
-  filterArray: string[];
+  list: { name: string; id: string }[];
 }
 
-const FilterType: React.FC<Props> = ({ title, list, id, filterArray }) => {
+const FilterType: React.FC<Props> = ({ title, list, id }) => {
   const [open, setOpen] = useState<boolean>(false);
 
   return (
@@ -24,12 +23,7 @@ const FilterType: React.FC<Props> = ({ title, list, id, filterArray }) => {
       {open && (
         <ul>
           {list.map((el) => (
-            <FilterOption
-              id={id}
-              filterArray={filterArray}
-              name={el}
-              key={el}
-            />
+            <FilterOption id={id} name={el.name} value={el.id} key={el.name} />
           ))}
         </ul>
       )}

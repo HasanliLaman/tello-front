@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import eye from "../../../assets/images/icon-eye.svg";
 import { logInSchema } from "../../../schemas";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { api } from "../../../server";
-import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../store";
+import { getToken } from "../../../asyncThunk";
+import { Link } from "react-router-dom";
 
 interface InputTypes {
   email: string;
@@ -12,6 +14,8 @@ interface InputTypes {
 }
 
 const LogInForm = () => {
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -21,30 +25,18 @@ const LogInForm = () => {
     resolver: yupResolver(logInSchema),
   });
 
-  const submitHandler = async function (data: { email: string }) {
-    try {
-      await api.post(
-        `/customers/email-token`,
-        {
-          email: data.email,
-          base_url: "https://se-final-project.netlify.app/dashboard",
-        },
-        {
-          headers: {
-            "X-Authorization":
-              "sk_44386cb648d0b470fff3958c1db5c12168d99d319a75a",
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      toast.success("Elektron poçtunuzu yoxlayın !");
-      reset({
-        email: "",
-        password: "",
-      });
-    } catch (err) {
-      toast.error("Xəta baş verdi!");
-    }
+  const dispacth = useDispatch<AppDispatch>();
+
+  const submitHandler = async function (data: {
+    email: string;
+    password: string;
+  }) {
+    dispacth(getToken({ url: "login", body: data }));
+
+    reset({
+      email: "",
+      password: "",
+    });
   };
 
   return (
@@ -63,16 +55,22 @@ const LogInForm = () => {
         <label htmlFor="password">Şifrə</label>
         <div className="form-password">
           <input
-            type="password"
+            type={passwordVisible ? "text" : "password"}
             placeholder="Şifrənizi daxil edin"
             id="password"
             {...register("password")}
           />
-          <img src={eye} alt="password" />
+          <img
+            onClick={() => setPasswordVisible(!passwordVisible)}
+            src={eye}
+            alt="password"
+          />
         </div>
         {errors.password?.message && <p>{errors.password?.message}</p>}
       </div>
-      <p>Şifrəni unutmusunuz?</p>
+      <p>
+        <Link to="../forgetpassword">Şifrəni unutmusunuz?</Link>
+      </p>
       <button>Daxil ol</button>
     </form>
   );

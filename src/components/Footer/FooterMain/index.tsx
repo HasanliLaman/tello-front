@@ -15,10 +15,10 @@ const FooterMain = () => {
             links={true}
             base="products"
             items={[
-              { name: "Yeni", slug: "new" },
-              { name: "Endirimlər", slug: "discount" },
-              { name: "Aksessuarlar", slug: "accessoires" },
-              { name: "Bütün brendlər", slug: "all-brands" },
+              { name: "Yeni", id: "63499c8c0dcd7543dea37b48" },
+              { name: "Endirimlər", id: "63499c790dcd7543dea37b45" },
+              { name: "Aksessuarlar", id: "6349a240deb4fa69723b4d73" },
+              { name: "Bütün brendlər", id: "6349a258deb4fa69723b4d76" },
             ]}
             header="Menu"
           />
@@ -26,9 +26,9 @@ const FooterMain = () => {
             links={true}
             base=""
             items={[
-              { name: "Tez-tez soruşulan suallar", slug: "" },
-              { name: "Çatdırılma xidməti", slug: "" },
-              { name: "Geri qaytarılma şərtləri", slug: "" },
+              { name: "Tez-tez soruşulan suallar", id: "" },
+              { name: "Çatdırılma xidməti", id: "" },
+              { name: "Geri qaytarılma şərtləri", id: "" },
             ]}
             header="Kömək"
           />

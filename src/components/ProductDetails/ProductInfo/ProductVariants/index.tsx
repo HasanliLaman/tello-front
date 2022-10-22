@@ -18,49 +18,40 @@ const ProductVariants: React.FC<{
   const data = useSelector((state: RootState) => state.product);
 
   const getVariants = function (products: RootObject) {
-    if (products.variant_groups[0]) {
-      const vars = products.variant_groups.map((variant) => {
-        if (variant.name === "Color") {
-          return (
-            <div className="color">
-              <h2>Rəng:</h2>
-              {variant.options.map((el, index) => (
-                <div
-                  className={index === selectedColor ? "variant-active" : ""}
-                  onClick={() => setSelectedColor(index)}
-                  key={el.name}
-                  style={{ background: `${el.name.toLowerCase()}` }}
-                ></div>
-              ))}
+    const vars: any = [];
+    if (products.data.product.colors[0]) {
+      vars.push(
+        <div className="color">
+          <h2>Rəng:</h2>
+          {products.data.product.colors.map((el, index) => (
+            <div
+              className={index === selectedColor ? "variant-active" : ""}
+              onClick={() => setSelectedColor(index)}
+              key={el}
+              style={{ background: `${el.toLowerCase()}` }}
+            ></div>
+          ))}
+        </div>
+      );
+    }
+    if (products.data.product.storage[0]) {
+      vars.push(
+        <div className="storage">
+          <h2>Yaddaş:</h2>
+          {products.data.product.storage.map((el, index) => (
+            <div
+              className={index === selectedStorage ? "variant-active" : ""}
+              onClick={() => setSelectedStorage(index)}
+              key={el}
+            >
+              {el}
             </div>
-          );
-        } else if (variant.name === "Storage") {
-          return (
-            <div className="storage">
-              <h2>Yaddaş:</h2>
-              {variant.options.map((el, index) => (
-                <div
-                  className={index === selectedStorage ? "variant-active" : ""}
-                  onClick={() => setSelectedStorage(index)}
-                  key={el.name}
-                >
-                  {el.name}
-                </div>
-              ))}
-            </div>
-          );
-        } else
-          return (
-            <div className="storage">
-              <h2>{variant.name}:</h2>
-              {variant.options.map((el) => (
-                <div key={el.name}>{el.name}</div>
-              ))}
-            </div>
-          );
-      });
-      return vars;
-    } else return [];
+          ))}
+        </div>
+      );
+    }
+
+    return vars;
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import FilterType from "../FilterType";
 import StyleFilterConainer from "./style";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,9 +8,6 @@ import { closeFilter } from "../../../slices/filterSlice";
 const FilterContainer = () => {
   const dispatch = useDispatch<AppDispatch>();
   const data = useSelector((state: RootState) => state.filter);
-  const brandArray = useMemo(() => data.brandList, [data.brandList]);
-  const categoryArray = useMemo(() => data.categoryList, [data.categoryList]);
-  const priceArray = useMemo(() => data.priceList, [data.priceList]);
 
   return (
     <StyleFilterConainer className={data.isOpenFilter ? "active" : ""}>
@@ -36,15 +33,19 @@ const FilterContainer = () => {
         <FilterType
           id="brand"
           title="Brend"
-          filterArray={brandArray}
-          list={["Apple", "Samsung", "Xiaomi", "Huawei"]}
+          list={[
+            { name: "Apple", id: "6349a027deb4fa69723b4d6e" },
+            { name: "Samsung", id: "63499ed1deb4fa69723b4d6b" },
+            { name: "Xiaomi", id: "63499e29deb4fa69723b4d66" },
+            { name: "Huawei", id: "63499d820dcd7543dea37b4b" },
+          ]}
         />
-        <FilterType
+        {/* <FilterType
           id="category"
           title="Kateqoriya"
           filterArray={categoryArray}
           list={["PC", "Tablet", "Smartphone", "Smartwatch", "Headphones"]}
-        />
+        /> */}
         {/* <FilterType
           id="color"
           title="Rəng"
@@ -54,8 +55,13 @@ const FilterContainer = () => {
         <FilterType
           id="price"
           title="Qiymət"
-          filterArray={priceArray}
-          list={["0-500", "500-1000", "1000-1500", "1500-2000", "2000-5000"]}
+          list={[
+            { name: "0-500", id: "0,500" },
+            { name: "500-1000", id: "500,1000" },
+            { name: "1000-1500", id: "1000,1500" },
+            { name: "1500-2000", id: "1500,2000" },
+            { name: "2000-2500", id: "2000,2500" },
+          ]}
         />
       </div>
     </StyleFilterConainer>

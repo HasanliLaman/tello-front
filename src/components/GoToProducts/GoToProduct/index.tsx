@@ -3,11 +3,7 @@ import { Link } from "react-router-dom";
 import StyleGoToProduct from "./style";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../store";
-import {
-  clearFilter,
-  changeBrandList,
-  changeCategoryList,
-} from "../../../slices/filterSlice";
+import { updateQuery } from "../../../slices/filterSlice";
 
 const GoToProduct: React.FC<{
   grid: boolean;
@@ -16,22 +12,17 @@ const GoToProduct: React.FC<{
   id: string;
   img: string;
 }> = (props) => {
-  const dispatch = useDispatch<AppDispatch>();
-  const goToProducts = function () {
-    dispatch(clearFilter());
-    if (props.id === "accessoires") {
-      dispatch(changeBrandList(props.id));
-    } else {
-      dispatch(changeCategoryList(props.id));
-    }
-  };
+  // const dispatch = useDispatch<AppDispatch>();
+  // const goToProducts = function () {
+  //   dispatch(updateQuery());
+  // };
 
   return (
     <StyleGoToProduct grid={props.grid} padding={props.padding}>
       <div>
         <h2>{props.title}</h2>
         {/* <p>Məhsul sayı: 322</p> */}
-        <Link onClick={goToProducts} to="/products">
+        <Link to="/products">
           Məhsullara keçid
           <svg
             width="7"
