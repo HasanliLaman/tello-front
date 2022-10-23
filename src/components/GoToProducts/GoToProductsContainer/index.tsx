@@ -2,35 +2,28 @@ import React from "react";
 import StyleGoToProductsContainer from "./style";
 import Container from "../../UI/Container";
 import GoToProduct from "../GoToProduct";
-import phone from "../../../assets/images/products-phone.svg";
-import watch from "../../../assets/images/products-watch.svg";
-import accessoire from "../../../assets/images/products-accessoire.svg";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store";
 
 const GoToProductsContainer = () => {
+  const { categories } = useSelector((state: RootState) => state.categories);
+
   return (
     <StyleGoToProductsContainer>
       <Container>
-        <GoToProduct
-          grid={true}
-          id="smartphone"
-          title="Telefon"
-          img={phone}
-          padding={false}
-        />
-        <GoToProduct
-          grid={false}
-          id="smartwatch"
-          title="Smart Saat"
-          img={watch}
-          padding={true}
-        />
-        <GoToProduct
-          grid={false}
-          title="Aksesuar"
-          id="accessoires"
-          img={accessoire}
-          padding={true}
-        />
+        {categories.data &&
+          categories.data.categories
+            .filter((el) => el.cover)
+            .map((el, i) => (
+              <GoToProduct
+                grid={i === 0 ? true : false}
+                title={el.name}
+                id={el._id}
+                key={el._id}
+                img={el.image.url}
+                padding={i === 0 ? false : true}
+              />
+            ))}
       </Container>
     </StyleGoToProductsContainer>
   );

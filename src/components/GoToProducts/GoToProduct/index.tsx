@@ -12,17 +12,17 @@ const GoToProduct: React.FC<{
   id: string;
   img: string;
 }> = (props) => {
-  // const dispatch = useDispatch<AppDispatch>();
-  // const goToProducts = function () {
-  //   dispatch(updateQuery());
-  // };
+  const dispatch = useDispatch<AppDispatch>();
+  const goToProducts = function () {
+    dispatch(updateQuery({ field: "categories", value: props.id }));
+  };
 
   return (
     <StyleGoToProduct grid={props.grid} padding={props.padding}>
       <div>
         <h2>{props.title}</h2>
         {/* <p>Məhsul sayı: 322</p> */}
-        <Link to="/products">
+        <Link onClick={goToProducts} to="/products">
           Məhsullara keçid
           <svg
             width="7"

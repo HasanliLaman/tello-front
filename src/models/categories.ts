@@ -9,6 +9,11 @@ declare module namespace {
     __v: number;
   }
 
+  export interface Image {
+    url: string;
+    publicId: string;
+  }
+
   export interface Category {
     _id: string;
     name: string;
@@ -16,6 +21,8 @@ declare module namespace {
     subcategories: Subcategory[];
     createdAt: Date;
     updatedAt: Date;
+    image: Image;
+    cover?: boolean;
   }
 
   export interface Data {
@@ -28,5 +35,4 @@ declare module namespace {
     data: Data;
   }
 }
-
 export default namespace;
