@@ -10,11 +10,21 @@ const StyleCommentType = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
-    gap: 2.8rem;
+    gap: 1.5rem;
     font-weight: 300;
     font-size: 5.6rem;
     line-height: 7.1rem;
     color: #000000;
+
+    div {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      img {
+        width: 22.3px;
+      }
+    }
   }
 
   article {
@@ -29,6 +39,7 @@ const StyleCommentType = styled.div`
       line-height: 2.8rem;
       border-top: 1px solid #c4c4c4;
       padding-top: 2.4rem;
+      margin-bottom: 1.8rem;
     }
 
     span {
@@ -57,6 +68,7 @@ const StyleCommentType = styled.div`
       h3 {
         border: 0;
         padding: 0.6rem 0 0;
+        margin-bottom: 1.5rem;
       }
 
       span {
@@ -67,11 +79,13 @@ const StyleCommentType = styled.div`
     .score {
       font-size: 7.2rem;
       line-height: 9.1rem;
-      gap: 3.7rem;
+      gap: 1rem;
       padding: 0 4.3rem;
 
-      img {
-        width: 192px;
+      div {
+        img {
+          width: 27.43px;
+        }
       }
     }
   }

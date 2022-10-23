@@ -52,3 +52,11 @@ export const resetPasswordSchema = yup.object().shape({
       "Şifrə və təkrar şifrə eyni olmalıdır."
     ),
 });
+
+export const reviewSchema = yup.object().shape({
+  rating: yup.string().required("Bu sahə doldurulmalıdır."),
+  content: yup
+    .string()
+    .min(10, "Rəy ən azı 10 simvoldan ibarət olmalıdır.")
+    .required("Bu sahə doldurulmalıdır."),
+});

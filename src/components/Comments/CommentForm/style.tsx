@@ -14,6 +14,12 @@ const StyleCommentForm = styled.section`
     display: grid;
     row-gap: 2.4rem;
 
+    p {
+      color: var(--color-red);
+      font-size: 1.4rem;
+      line-height: 1.6rem;
+    }
+
     & > div {
       color: var(--color-dark-gray);
       font-size: 1.4rem;
@@ -30,6 +36,10 @@ const StyleCommentForm = styled.section`
         outline: 0;
         font-family: inherit;
         padding: 1.4rem 1.6rem;
+      }
+
+      textarea {
+        resize: vertical;
       }
 
       select {
@@ -60,13 +70,6 @@ const StyleCommentForm = styled.section`
       max-width: 800px;
       margin: 0 auto;
       gap: 3.2rem;
-      grid-template-columns: 1fr 1fr;
-
-      button,
-      & > div:last-of-type,
-      & > div:nth-of-type(3) {
-        grid-column: 1/3;
-      }
     }
   }
 `;

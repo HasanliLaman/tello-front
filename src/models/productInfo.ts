@@ -16,6 +16,23 @@ export interface Category {
   slug: string;
 }
 
+export interface Creator {
+  _id: string;
+  name: string;
+}
+
+export interface Review {
+  _id: string;
+  content: string;
+  rating: number;
+  creator: Creator;
+  product: string;
+  createdAt: Date;
+  updatedAt: Date;
+  __v: number;
+  id: string;
+}
+
 export interface Product {
   _id: string;
   name: string;
@@ -24,10 +41,14 @@ export interface Product {
   price: number;
   assets: Asset[];
   categories: Category[];
-  colors: string[];
+  colors: any[];
   storage: any[];
   createdAt: Date;
   updatedAt: Date;
+  __v: number;
+  ratingsAverage: number;
+  ratingsQuantity: number;
+  reviews: Review[];
   id: string;
 }
 
@@ -36,7 +57,6 @@ export interface Data {
 }
 
 export interface RootObject {
-  _id: any;
   status: string;
   data: Data;
 }
