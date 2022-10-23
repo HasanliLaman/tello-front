@@ -35,7 +35,7 @@ const Cart = () => {
       <Container>
         <h2>{`Səbət (${totalQuantity} məhsul)`}</h2>
         {!totalQuantity && <CartEmpty />}
-        {totalQuantity && <CartProductContainer />}
+        {Boolean(totalQuantity) && <CartProductContainer />}
       </Container>
     </StyleCart>
   );

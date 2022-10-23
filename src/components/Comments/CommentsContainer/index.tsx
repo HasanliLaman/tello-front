@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import CommentForm from "../CommentForm";
 import CommentType from "../CommentType";
 import StyleCommentsContainer from "./style";

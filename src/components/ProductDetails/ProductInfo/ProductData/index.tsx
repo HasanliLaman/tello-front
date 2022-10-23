@@ -1,6 +1,7 @@
 import React from "react";
 import StyleProductData from "./style";
-import stars from "../../../../assets/images/comment-review.svg";
+import filled from "../../../../assets/images/star-filled.svg";
+import empty from "../../../../assets/images/star-empty.svg";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store";
 
@@ -11,9 +12,15 @@ const ProductData = () => {
     <StyleProductData>
       <p>{data.product.data.product.name}</p>
       <div className="comment">
-        <img alt="review" src={stars} />
-        <span>(226)</span>
-        <p>57 rəy</p>
+        <div>
+          {[0, 0, 0, 0, 0].map((el, i) => {
+            if (i < Math.round(data.product.data.product.ratingsAverage))
+              return <img key={i} alt="star" src={filled} />;
+            else return <img alt="star" key={i} src={empty} />;
+          })}
+        </div>
+        <span>{data.product.data.product.ratingsAverage.toFixed(1)}</span>
+        <p>{data.product.data.product.ratingsQuantity} rəy</p>
       </div>
       <div className="price ">
         {/* <span>

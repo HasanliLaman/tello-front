@@ -1,6 +1,24 @@
 import styled from "styled-components";
 
 const StyleCartSummary = styled.div`
+display: flex;
+flex-direction: column;
+gap: 2.5rem;
+
+button {
+      cursor: pointer;
+      background: var(--color-green);
+      border-radius: var(--border-radius);
+      font-weight: 500;
+      font-size: 1.4rem;
+      line-height: 1.6rem;
+      color: var(--color-white);
+      border: 0;
+      width: 100%;
+      padding: 1.6rem;
+    }
+
+ .summary{
   background: var(--color-white);
   border-radius: 16px;
   padding: 3.2rem 2.4rem;

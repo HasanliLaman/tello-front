@@ -63,8 +63,13 @@ const StyleProductData = styled.div`
     align-items: flex-start;
     margin: 1.6rem 0 2.4rem;
 
+    & > div {
+      display: flex;
+      gap: 0.7rem;
+    }
+
     img {
-      width: 106px;
+      width: 17px;
     }
 
     p {

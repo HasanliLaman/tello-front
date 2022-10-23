@@ -32,8 +32,13 @@ const StyleUserProfile = styled.div`
       }
     }
 
-    li:first-of-type {
+    .active {
       color: var(--color-green);
+
+      img {
+        filter: brightness(0) saturate(100%) invert(58%) sepia(85%)
+          saturate(398%) hue-rotate(91deg) brightness(98%) contrast(86%);
+      }
     }
   }
 `;

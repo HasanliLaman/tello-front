@@ -16,7 +16,7 @@ const UserProfile = () => {
     <StyleUserProfile>
       <h2>Profilim</h2>
       <ul>
-        <li>
+        <li className="active">
           <div>
             <img src={basket} alt="icon" />
           </div>
