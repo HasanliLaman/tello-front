@@ -2,25 +2,31 @@ import React from "react";
 import ProductInfo from "../ProductInfo";
 import StyleProductContainer from "./style";
 import Container from "../../UI/Container";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState, AppDispatch } from "../../../store";
-import { getByCategory } from "../../../helpers/getByCategory";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../store";
 import { updateQuery } from "../../../slices/filterSlice";
 import { Link } from "react-router-dom";
 import Loading from "../../UI/Loading";
+import { Product } from "../../../models/productInfo";
 
 const ProductContainer: React.FC<{
   className: string;
   title: string;
-  categories: string[];
+  id: string;
+  products: Product[];
 }> = (props) => {
-  const data = useSelector((state: RootState) => state.products);
+  const dispatch = useDispatch<AppDispatch>();
 
   return (
     <StyleProductContainer className={props.className}>
       <Container>
         <h2>{props.title}</h2>
-        <Link to="/products">
+        <Link
+          onClick={() => {
+            dispatch(updateQuery({ field: "categories", value: props.id }));
+          }}
+          to="/products"
+        >
           Hamısına bax
           <svg
             width="7"
@@ -36,14 +42,10 @@ const ProductContainer: React.FC<{
           </svg>
         </Link>
         <div className="products">
-          {!data.products.data && <Loading padding={true} height={false} />}
-          {data.products.data &&
-            getByCategory(data.products.data.products, props.categories)
-              .filter((el, i) => {
-                if (i > 3) return false;
-                return true;
-              })
-              .map((el) => <ProductInfo info={el} key={el.id} />)}
+          {!props.products[0] && <Loading padding={true} height={false} />}
+          {props.products.map((el) => (
+            <ProductInfo info={el} key={el._id} />
+          ))}
         </div>
       </Container>
     </StyleProductContainer>
