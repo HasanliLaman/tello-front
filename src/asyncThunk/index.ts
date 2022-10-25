@@ -76,11 +76,16 @@ export const fetchSearch = createAsyncThunk(
 // filterSlice
 export const fetchFilter = createAsyncThunk(
   "filter/fetchFilter",
-  async (query: string) => {
+  async (params: { page: number; sort: string; query: string }) => {
     try {
-      const res = await api.get(`/products${query ? "?" + query : ""}`);
+      const res = await api.get(
+        `/products?page=${params.page}&limit=9&sort=${params.sort}&${params.query}`
+      );
 
-      return res.data.data.products;
+      return {
+        length: res.data.numProducts,
+        products: res.data.data.products,
+      };
     } catch (error) {
       throw error;
     }

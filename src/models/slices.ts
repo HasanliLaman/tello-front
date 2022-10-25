@@ -38,6 +38,7 @@ export interface FilterState {
   error: null | string;
   query: string;
   displayedProducts: TypeProducts.Product[];
+  length: number;
 }
 
 export interface FavoritesState {

@@ -1,45 +1,38 @@
-import React, { useEffect, useState } from "react";
-import ReactPaginate from "react-paginate";
+import React from "react";
 import StyleProductsPagination from "./style";
 import AllProducts from "../AllProducts";
-import TypeProducts from "../../../models/products";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
 
-const ProductsPagination: React.FC<{ itemsPerPage: number }> = ({
-  itemsPerPage,
-}) => {
-  const { displayedProducts } = useSelector((state: RootState) => state.filter);
-  const [currentItems, setCurrentItems] = useState<
-    TypeProducts.Product[] | null
-  >(null);
+const ProductsPagination: React.FC<{
+  page: number;
+  setPage: (num: number) => void;
+}> = ({ setPage, page }) => {
+  const { displayedProducts, length } = useSelector(
+    (state: RootState) => state.filter
+  );
 
-  const [pageCount, setPageCount] = useState(0);
-  const [itemOffset, setItemOffset] = useState(0);
+  const goBack = () => {
+    setPage(page === 1 ? 1 : page - 1);
+  };
 
-  useEffect(() => {
-    const endOffset = itemOffset + itemsPerPage;
-    setCurrentItems(displayedProducts.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(displayedProducts.length / itemsPerPage));
-  }, [itemOffset, displayedProducts, itemsPerPage]);
-
-  const handlePageClick = (event: { selected: number }) => {
-    const newOffset =
-      (event.selected * itemsPerPage) % displayedProducts.length;
-    setItemOffset(newOffset);
+  const goAhead = () => {
+    if (page < length / 9) setPage(page + 1);
+    else setPage(page);
   };
 
   return (
     <StyleProductsPagination>
-      <AllProducts currentItems={currentItems} />
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel=">"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={4}
-        pageCount={pageCount}
-        previousLabel="<"
-      />
+      <AllProducts currentItems={displayedProducts} />
+      <div className="pages">
+        <span onClick={goBack} className="previous">
+          {"<"}
+        </span>
+        <span className="page">{page}</span>
+        <span onClick={goAhead} className="next">
+          {">"}
+        </span>
+      </div>
     </StyleProductsPagination>
   );
 };

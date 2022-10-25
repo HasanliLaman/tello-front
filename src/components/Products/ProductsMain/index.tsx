@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import StyleProductsMain from "./style";
 import Container from "../../UI/Container";
 import FilterContainer from "../../Filter/FilterContainer";
@@ -11,14 +11,20 @@ import { fetchFilter } from "../../../asyncThunk";
 import Loading from "../../UI/Loading";
 
 const ProductsMain = () => {
-  const { displayedProducts, query, loading } = useSelector(
+  const [page, setPage] = useState(1);
+  const [sort, setSort] = useState("createdAt");
+  const { displayedProducts, query, loading, length } = useSelector(
     (state: RootState) => state.filter
   );
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    dispatch(fetchFilter(query));
-  }, [query, dispatch]);
+    dispatch(fetchFilter({ page, sort, query }));
+  }, [query, dispatch, page, sort]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [query]);
 
   return (
     <StyleProductsMain>
@@ -26,11 +32,11 @@ const ProductsMain = () => {
       <Container>
         <FilterContainer />
         <div className="details">
-          <p>{displayedProducts.length} məhsul tapıldı</p>
-          <ListOrder />
+          <p>{length} məhsul tapıldı</p>
+          <ListOrder setSort={setSort} />
           {loading && <Loading padding={true} height={false} />}
           {!loading && displayedProducts[0] && (
-            <ProductsPagination itemsPerPage={9} />
+            <ProductsPagination page={page} setPage={setPage} />
           )}
         </div>
       </Container>

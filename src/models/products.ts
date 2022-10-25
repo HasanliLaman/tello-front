@@ -39,6 +39,7 @@ declare module namespace {
   export interface RootObject {
     status: string;
     length: number;
+    numProducts: number;
     data: Data;
   }
 }

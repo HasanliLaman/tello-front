@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import StyleListOrder from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../../store";
-import { changeOrderSelected } from "../../../slices/filterSlice";
+import { changeOrderSelected, updateQuery } from "../../../slices/filterSlice";
 
-const ListOrder = () => {
+const ListOrder: React.FC<{ setSort: (str: string) => void }> = ({
+  setSort,
+}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
   const data = useSelector((state: RootState) => state.filter);
@@ -12,6 +14,7 @@ const ListOrder = () => {
   const changeSelected = function (e: React.MouseEvent<HTMLLIElement>) {
     const text = e.target as HTMLLIElement;
     dispatch(changeOrderSelected(text.innerText));
+    setSort(text.id);
   };
 
   return (
@@ -32,9 +35,15 @@ const ListOrder = () => {
         />
       </svg>
       <ul className={isOpen ? "active" : ""}>
-        <li onClick={changeSelected}>Ən yenilər</li>
-        <li onClick={changeSelected}>Ucuzdan bahalıya</li>
-        <li onClick={changeSelected}>Bahalıdan ucuza</li>
+        <li id="createdAt" onClick={changeSelected}>
+          Ən yenilər
+        </li>
+        <li id="price" onClick={changeSelected}>
+          Ucuzdan bahalıya
+        </li>
+        <li id="-price" onClick={changeSelected}>
+          Bahalıdan ucuza
+        </li>
       </ul>
     </StyleListOrder>
   );

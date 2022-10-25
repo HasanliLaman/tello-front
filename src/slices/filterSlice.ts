@@ -10,6 +10,7 @@ const initialState: FilterState = {
   displayedProducts: [],
   loading: false,
   error: null,
+  length: 0,
 };
 
 export const filterSlice = createSlice({
@@ -56,7 +57,8 @@ export const filterSlice = createSlice({
     builder.addCase(fetchFilter.fulfilled, (state, action) => ({
       ...state,
       loading: false,
-      displayedProducts: action.payload,
+      displayedProducts: action.payload.products,
+      length: action.payload.length,
     }));
     builder.addCase(fetchFilter.pending, (state) => ({
       ...state,
