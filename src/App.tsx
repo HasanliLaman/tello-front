@@ -14,6 +14,8 @@ import Error from "./pages/Error";
 import ForgetPassword from "./pages/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Favorites from "./pages/Favorites";
+import User from "./pages/User";
+import BasketEmpty from "./components/BasketEmpty";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -29,7 +31,10 @@ const App = () => {
           <Route path="products/:productId" element={<ProductsInfo />} />
           <Route path="/products" element={<Products />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard />}>
+            <Route path="orders" element={<BasketEmpty />} />
+            <Route path="user" element={<User />} />
+          </Route>
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/join" element={<Join />}>
             <Route path="login" element={<LogIn />} />

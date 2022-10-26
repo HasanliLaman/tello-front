@@ -35,7 +35,7 @@ const ListOrder: React.FC<{ setSort: (str: string) => void }> = ({
         />
       </svg>
       <ul className={isOpen ? "active" : ""}>
-        <li id="createdAt" onClick={changeSelected}>
+        <li id="-createdAt" onClick={changeSelected}>
           Ən yenilər
         </li>
         <li id="price" onClick={changeSelected}>

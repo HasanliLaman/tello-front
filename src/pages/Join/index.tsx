@@ -40,7 +40,7 @@ const Join = () => {
     }
   }, [data.loggedIn, updateCart]);
 
-  if (data.loggedIn) return <Navigate to="/dashboard" />;
+  if (data.loggedIn) return <Navigate to="/dashboard/orders" />;
 
   return (
     <StyleJoin>

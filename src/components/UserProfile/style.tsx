@@ -17,10 +17,18 @@ const StyleUserProfile = styled.div`
     font-size: 1.6rem;
     line-height: 2.4rem;
 
-    li {
+    .logout {
       display: flex;
       align-items: center;
       gap: 1.6rem;
+    }
+
+    li {
+      a {
+        display: flex;
+        align-items: center;
+        gap: 1.6rem;
+      }
       cursor: pointer;
 
       div {

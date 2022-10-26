@@ -8,39 +8,44 @@ import logout from "../../assets/images/icon-log-out.svg";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store";
 import { logOutUser } from "../../slices/authSlice";
+import { Link } from "react-router-dom";
 
-const UserProfile = () => {
+const UserProfile = ({ orders, details, setDetails, setOrders }) => {
   const dispacth = useDispatch<AppDispatch>();
 
   return (
     <StyleUserProfile>
       <h2>Profilim</h2>
       <ul>
-        <li className="active">
-          <div>
-            <img src={basket} alt="icon" />
-          </div>
-          <p>Sifarişlərim</p>
+        <li
+          onClick={() => {
+            setOrders(true);
+            setDetails(false);
+          }}
+          className={orders ? "active" : ""}
+        >
+          <Link to="orders">
+            <div>
+              <img src={basket} alt="icon" />
+            </div>
+            <p>Sifarişlərim</p>
+          </Link>
         </li>
-        <li>
-          <div>
-            <img src={favorite} alt="icon" />
-          </div>
-          <p>Favorilərim</p>
+        <li
+          onClick={() => {
+            setOrders(false);
+            setDetails(true);
+          }}
+          className={details ? "active" : ""}
+        >
+          <Link to="user">
+            <div>
+              <img src={user} alt="icon" />
+            </div>
+            <p>Şəxsi məlumatlar</p>
+          </Link>
         </li>
-        <li>
-          <div>
-            <img src={user} alt="icon" />
-          </div>
-          <p>Şəxsi məlumatlar</p>
-        </li>
-        <li>
-          <div>
-            <img src={location} alt="icon" />
-          </div>
-          <p>Çatdırılma ünvanı</p>
-        </li>
-        <li onClick={() => dispacth(logOutUser())}>
+        <li className="logout" onClick={() => dispacth(logOutUser())}>
           <div>
             <img src={logout} alt="icon" />
           </div>

@@ -12,7 +12,7 @@ import Loading from "../../UI/Loading";
 
 const ProductsMain = () => {
   const [page, setPage] = useState(1);
-  const [sort, setSort] = useState("createdAt");
+  const [sort, setSort] = useState("-createdAt");
   const { displayedProducts, query, loading, length } = useSelector(
     (state: RootState) => state.filter
   );

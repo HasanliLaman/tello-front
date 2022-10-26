@@ -37,25 +37,62 @@ const Homepage = () => {
   return (
     <StyleHomepage>
       <HeroSlider />
-      {products
-        .filter((el, i) => i < 2)
-        .map((el, i) => (
-          <ProductContainer
-            key={el._id.categories}
-            id={el._id.categories}
-            title={titles[i]}
-            className={i === 0 ? "best-seller" : ""}
-            products={el.products.slice(0, 4)}
-          />
-        ))}
-      <Ads />
-      {products[2] && (
+      {products[0] && (
         <ProductContainer
-          key={products[2]._id.categories}
-          id={products[2]._id.categories}
+          key={
+            products.find(
+              (el) => el._id.categories === "6349a258deb4fa69723b4d76"
+            )._id.categories
+          }
+          id={
+            products.find(
+              (el) => el._id.categories === "6349a258deb4fa69723b4d76"
+            )._id.categories
+          }
+          title={titles[0]}
+          className="best-seller"
+          products={products
+            .find((el) => el._id.categories === "6349a258deb4fa69723b4d76")
+            .products.slice(0, 4)}
+        />
+      )}
+      {products[0] && (
+        <ProductContainer
+          key={
+            products.find(
+              (el) => el._id.categories === "63499c8c0dcd7543dea37b48"
+            )._id.categories
+          }
+          id={
+            products.find(
+              (el) => el._id.categories === "63499c8c0dcd7543dea37b48"
+            )._id.categories
+          }
+          title={titles[1]}
+          className=""
+          products={products
+            .find((el) => el._id.categories === "63499c8c0dcd7543dea37b48")
+            .products.slice(0, 4)}
+        />
+      )}
+      <Ads />
+      {products[0] && (
+        <ProductContainer
+          key={
+            products.find(
+              (el) => el._id.categories === "6349a240deb4fa69723b4d73"
+            )._id.categories
+          }
+          id={
+            products.find(
+              (el) => el._id.categories === "6349a240deb4fa69723b4d73"
+            )._id.categories
+          }
           title={titles[2]}
           className=""
-          products={products[2].products.slice(0, 4)}
+          products={products
+            .find((el) => el._id.categories === "6349a240deb4fa69723b4d73")
+            .products.slice(0, 4)}
         />
       )}
       <GoToProductsContainer />
