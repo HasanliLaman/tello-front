@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../../server";
+import { toast } from "react-toastify";
 
 interface InputTypes {
   rating: string;
@@ -34,27 +35,31 @@ const CommentForm: React.FC<{
     rating: string;
     content: string;
   }) {
-    if (!loggedIn) {
-      navigate("/join/login");
-      return;
-    }
-
-    const res = await api.post(
-      `/products/${product.data.product._id}/review`,
-      data,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
+    try {
+      if (!loggedIn) {
+        navigate("/join/login");
+        return;
       }
-    );
 
-    setComments([...comments, res.data.data.review]);
+      const res = await api.post(
+        `/products/${product.data.product._id}/review`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
 
-    reset({
-      rating: "",
-      content: "",
-    });
+      setComments([...comments, res.data.data.review]);
+
+      reset({
+        rating: "",
+        content: "",
+      });
+    } catch (err) {
+      toast.error("You have already commented.");
+    }
   };
 
   return (

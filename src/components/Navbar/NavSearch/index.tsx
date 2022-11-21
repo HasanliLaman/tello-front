@@ -18,7 +18,7 @@ const NavSearch: React.FC<{ className: string }> = (props) => {
     const timer = setTimeout(function () {
       if (e.target.value) dispatch(changeHistory(e.target.value));
       dispatch(fetchSearch(e.target.value));
-    }, 2000);
+    }, 1000);
     setTimerId(timer);
   };
 
